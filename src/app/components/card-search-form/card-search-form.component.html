@@ -1,0 +1,17 @@
+<div class="container d-flex flex-column justify-content-center vh-100">
+
+  <div class="mb-3 text-center">
+    <h2>Search a <span class="fw-bold">Magic: the Gathering</span> card to discover all its <span class="fw-bold">printed versions</span></h2>
+    <h4>A useful tool for global set collectors</h4>
+  </div>
+
+  <form class="row justify-content-center g-2" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-6 col-xl-5">
+      <input type="text" class="form-control" formControlName="cardName">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit">Search card</button>
+    </div>
+  </form>
+
+</div>
