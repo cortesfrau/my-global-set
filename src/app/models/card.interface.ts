@@ -1,4 +1,6 @@
+import { Print } from "./print.interface"
 export interface Card {
-  id: 'string',
-  name: 'string',
+  oracle_id: string,
+  name: string,
+  prints: Print[]
 }

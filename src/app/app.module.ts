@@ -6,11 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CardSearchFormComponent } from './components/card-search-form/card-search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CardPrintListComponent } from './components/card-print-list/card-print-list.component';
+import { CardPrintComponent } from './components/card-print/card-print.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardSearchFormComponent
+    CardSearchFormComponent,
+    CardPrintListComponent,
+    CardPrintComponent
   ],
   imports: [
     BrowserModule,
