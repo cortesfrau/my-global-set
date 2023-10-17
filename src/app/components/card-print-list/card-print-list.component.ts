@@ -10,5 +10,4 @@ import { Card } from 'src/app/models/card.interface';
 export class CardPrintListComponent {
 
   @Input() card!: Card;
-
 }

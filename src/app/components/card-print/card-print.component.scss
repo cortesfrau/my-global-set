@@ -25,24 +25,26 @@
     margin-bottom: .5rem;
 
     &__left {
-      width: calc(22% - .5rem);
+      width: 27%;
       margin-right: .5rem;
     }
 
     &__right {
-      width: calc(78% - .5rem);
+      width: 73%;
       margin-left: .5rem;
     }
   }
 
   &_name {
     font-size: $font-size-base;
-    margin-bottom: 0;
+    margin-bottom: .25rem;
     font-weight: $font-weight-bold;
   }
 
   &_set-icon {
-    margin-top: .5rem;
+    margin-top: .25rem;
+    width: 100%;
+    max-height: 40px;
   }
 
   &_set-name {

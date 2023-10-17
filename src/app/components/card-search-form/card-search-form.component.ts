@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { scryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
-import { switchMap } from 'rxjs';
+import { switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-card-search-form',
@@ -18,11 +18,29 @@ export class CardSearchFormComponent implements OnInit {
     cardName: new FormControl(''),
   });
 
+  isLoading: boolean = false;
+
   constructor(private scryfallService: scryfallService) {}
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  // onSubmit() {
+  //   const cardNameControl = this.cardForm.get('cardName');
+  //   if (cardNameControl && cardNameControl.value) {
+  //     const cardName = cardNameControl.value;
+  //     this.scryfallService.getCardOracleIdByName(cardName).pipe(
+  //       switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
+  //     ).subscribe((card) => {
+  //       this.scryfallService.addExtraInfoToPrints(card).subscribe((updatedCard) => {
+  //         this.card = updatedCard;
+  //         console.log(this.card);
+  //       });
+  //     });
+  //   }
+  // }
+
+    onSubmit() {
+    this.isLoading = true;
     const cardNameControl = this.cardForm.get('cardName');
     if (cardNameControl && cardNameControl.value) {
       const cardName = cardNameControl.value;
@@ -32,6 +50,10 @@ export class CardSearchFormComponent implements OnInit {
         this.scryfallService.addExtraInfoToPrints(card).subscribe((updatedCard) => {
           this.card = updatedCard;
           console.log(this.card);
+
+          timer(1000).subscribe(() => {
+            this.isLoading = false;
+          });
         });
       });
     }
