@@ -1,5 +1,5 @@
-// app-card-print-list.component.ts
 import { Component, Input } from '@angular/core';
+import { Card } from 'src/app/models/card.interface';
 import { Print } from 'src/app/models/print.interface';
 
 @Component({
@@ -7,6 +7,9 @@ import { Print } from 'src/app/models/print.interface';
   templateUrl: './card-print-list.component.html',
   styleUrls: ['./card-print-list.component.scss']
 })
+
 export class CardPrintListComponent {
-  @Input() prints: Print[] = [];
+
+  @Input() card!: Card;
+
 }

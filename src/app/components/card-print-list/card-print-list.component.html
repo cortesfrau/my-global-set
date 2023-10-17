@@ -1,5 +1,7 @@
-<div class="row g-4">
-  <div class="col-md-6 col-lg-4 col-xl-3" *ngFor="let print of prints">
-    <app-card-print [print]="print"></app-card-print>
+<div class="container">
+  <div class="row g-3">
+    <div class="col-md-6 col-lg-4 col-xl-3"  *ngFor="let print of card.prints">
+      <app-card-print [card]="card" [print]="print"></app-card-print>
+    </div>
   </div>
 </div>

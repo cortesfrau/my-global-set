@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CardPrintListComponent } from './components/card-print-list/card-print-list.component';
 import { CardPrintComponent } from './components/card-print/card-print.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CardPrintComponent } from './components/card-print/card-print.component
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
