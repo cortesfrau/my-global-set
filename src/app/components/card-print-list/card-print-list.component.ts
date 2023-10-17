@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Card } from 'src/app/models/card.interface';
-import { Print } from 'src/app/models/print.interface';
 
 @Component({
   selector: 'app-card-print-list',

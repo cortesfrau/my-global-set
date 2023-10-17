@@ -2,7 +2,6 @@
 
   <div class="mb-3 text-center">
     <h2>Search a <span class="fw-bold">Magic: the Gathering</span> card to discover all its <span class="fw-bold">printed versions</span></h2>
-    <h4>A useful tool for global set collectors</h4>
   </div>
 
   <form class="row justify-content-center g-2" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
@@ -15,7 +14,6 @@
   </form>
 
 </section>
-
 
 <section class="py-4">
   <app-card-print-list [card]="card"></app-card-print-list>

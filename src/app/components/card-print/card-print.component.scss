@@ -1,0 +1,55 @@
+// Custom SCSS Variables
+@import "./../../../shared/styles/variables";
+
+//-------------------------//
+//--- Card Print Styles ---//
+//-------------------------//
+.card-print {
+  padding: .5rem;
+  background-color: $white;
+  border-radius: $border-radius;
+  display: flex;
+
+  &_left {
+    width: calc(40% - .5rem);
+    margin-right: .5rem;
+  }
+
+  &_right {
+    width: calc(60% - .5rem);
+    margin-left: .5rem;
+  }
+
+  &_header {
+    display: flex;
+    margin-bottom: .5rem;
+
+    &__left {
+      width: calc(22% - .5rem);
+      margin-right: .5rem;
+    }
+
+    &__right {
+      width: calc(78% - .5rem);
+      margin-left: .5rem;
+    }
+  }
+
+  &_name {
+    font-size: $font-size-base;
+    margin-bottom: 0;
+    font-weight: $font-weight-bold;
+  }
+
+  &_set-icon {
+    margin-top: .5rem;
+  }
+
+  &_set-name {
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    margin-bottom: 0;
+  }
+
+}
+

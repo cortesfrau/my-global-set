@@ -91,24 +91,25 @@ export class scryfallService {
     return this.http.get(apiUrl);
   }
 
-  addExtraInfoToPrints(prints: Print[]): Observable<Card> {
-    const observables: Observable<Print>[] = [];
-
-    // Recorre los prints y agrega observables para obtener información del conjunto
-    prints.forEach((print: Print) => {
-      const observable = this.getSetById(print.set_id).pipe(
+  addExtraInfoToPrints(card: Card): Observable<Card> {
+    const observables: Observable<Print>[] = card.prints.map((print: Print) => {
+      return this.getSetById(print.set_id).pipe(
         map((setInfo: any) => {
-          // Agrega las nuevas propiedades
+          // Agrega las nuevas propiedades al objeto Print
           print.set_icon = setInfo.icon_svg_uri;
           print.has_foil = !setInfo.nonfoil_only;
-          return print; // Devuelve el print actualizado
+          return print; // Devuelve el objeto Print actualizado
         })
       );
-      observables.push(observable);
     });
 
-    // Combina todos los observables en uno solo y emite la matriz actualizada de prints
-    return forkJoin(observables);
+    // Combina todos los observables en uno solo y emite la Card actualizada
+    return forkJoin(observables).pipe(
+      map((prints: Print[]) => {
+        card.prints = prints; // Asigna las impresiones actualizadas a la Card
+        return card; // Devuelve la Card actualizada
+      })
+    );
   }
 
 }
