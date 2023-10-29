@@ -1,27 +1,36 @@
 <div class="card-print">
 
+  <div class="card-print_header">
+
+    <div class="card-print_header__left">
+      <img class="card-print_set-icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
+    </div>
+
+    <div class="card-print_header__right">
+      <h3 class="card-print_name">{{ card.name }}</h3>
+      <h4 class="card-print_set-name">{{ print.set_name }}</h4>
+
+    </div>
+
+  </div>
+
   <div class="card-print_body">
 
-    <div class="card-print_left">
+    <div class="card-print_body__left">
       <img class="card-print_image" src="{{ print.image_uri }}" alt="{{ card.name }} - {{ print.set_name }}">
     </div>
 
-    <div class="card-print_right">
+    <div class="card-print_body__right">
+
+      <!-- <p>Border color: {{ print.border_color }}</p> -->
 
 
-      <div class="card-print_header">
-
-        <div class="card-print_header__left">
-          <img class="card-print_set-icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
-        </div>
-
-        <div class="card-print_header__right">
-          <h3 class="card-print_name">{{ card.name }}</h3>
-          <h4 class="card-print_set-name">{{ print.set_name }}</h4>
-
-        </div>
-
-      </div>
+      <ul class="card-print_langs">
+        <li *ngFor="let language of print.languages">
+          <span class="card-print_langs__flag {{ language.flag_icon }}"></span>
+          <span class="card-print_langs__name">{{ language.name }}</span>
+        </li>
+      </ul>
 
     </div>
 

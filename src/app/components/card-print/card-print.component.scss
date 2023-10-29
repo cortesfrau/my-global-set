@@ -9,51 +9,29 @@
   box-shadow: $box-shadow-sm;
   border-radius: $border-radius;
 
-  &_body {
-    padding: .75rem;
-    display: flex;
-  }
-
-  &_left {
-    width: calc(40% - .5rem);
-    margin-right: .5rem;
-  }
-
-  &_right {
-    width: calc(60% - .5rem);
-    margin-left: .5rem;
-  }
-
-  &_image {
-    border-radius: 4.75% / 3.5%;
-    box-shadow: 0 .125rem .25rem rgba($black, .35);;
-  }
-
   &_header {
     display: flex;
-    margin-bottom: .5rem;
+    padding: 1rem 1rem .5rem 1rem;
 
     &__left {
-      width: 25%;
-      margin-right: .5rem;
+      width: auto;
+      margin-right: .75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     &__right {
-      width: 75%;
-      margin-left: .5rem;
+      width: auto;
+      margin-left: .75rem;
     }
   }
 
-  &_name {
-    font-size: $font-size-base;
-    margin-bottom: .25rem;
-    font-weight: $font-weight-bold;
-  }
-
   &_set-icon {
-    margin-top: .25rem;
     width: 100%;
-    max-height: 35px;
+    max-height: 40px;
+    max-width: 50px;
   }
 
   &_set-name {
@@ -62,11 +40,56 @@
     margin-bottom: 0;
   }
 
+  &_body {
+    padding: .5rem 1rem;
+    display: flex;
+
+    &__left {
+      width: calc(40% - .5rem);
+      margin-right: .5rem;
+    }
+
+    &__right {
+      width: calc(60% - .5rem);
+      margin-left: .5rem;
+    }
+  }
+
+  &_image {
+    border-radius: 4.75% / 3.5%;
+    box-shadow: 0 .125rem .25rem rgba($black, .35);;
+  }
+
+  &_name {
+    font-size: $font-size-base;
+    margin-bottom: .25rem;
+    font-weight: $font-weight-bold;
+  }
+
   &_footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .75rem;
+    padding: .5rem 1rem 1rem 1rem;
   }
+
+  // Languages List
+  &_langs {
+    list-style-type: none;
+    font-size: $font-size-sm;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    &__flag {
+      border-radius: 100%;
+      margin-right: .5rem;
+    }
+  }
+
 }
 

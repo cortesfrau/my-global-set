@@ -52,7 +52,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
           this.card = updatedCard;
           console.log(this.card);
 
-          timer(1000).subscribe(() => {
+          timer(500).subscribe(() => {
             this.isLoading = false;
           });
 
