@@ -18,39 +18,11 @@ export class scryfallService {
 
   }
 
-
-  // Mapping data to Card interface
-  // private mapCardData(data: any, cardOracleId: string): Card {
-  //   const prints: Print[] = data.data
-
-  //     // Filter non digital prints
-  //     .filter((printData: any) => printData.digital === false)
-
-  //     // Filter non foil prints
-  //     .filter((printData: any) => printData.foil === false)
-
-  //     // Map the data
-  //     .map((printData: any) => ({
-  //       id: printData.id,
-  //       set_id: printData.set_id,
-  //       set_name: printData.set_name,
-  //       set_code: printData.set,
-  //       image_uri: printData.image_uris.png,
-  //       border_color: printData.border_color,
-  //     })
-  //   );
-
-  //   return {
-  //     oracle_id: data.data.oracle_id,
-  //     name: data.data[0].name,
-  //     prints: prints
-  //   };
-  // }
-
-
+  
   private _mapCardData(data: any, cardOracleId: string): Card {
     const prints: Print[] = data.data.map((printData: any) => ({
       id: printData.id,
+      artist: printData.artist,
       set_id: printData.set_id,
       set_name: printData.set_name,
       set_code: printData.set,
@@ -64,7 +36,6 @@ export class scryfallService {
       prints: prints,
     };
   }
-
 
 
   // Get card Oracle ID by name
@@ -98,6 +69,7 @@ export class scryfallService {
           // Agrega las nuevas propiedades al objeto Print
           print.set_icon = setInfo.icon_svg_uri;
           print.has_foil = !setInfo.nonfoil_only;
+          print.set_release_date = setInfo.released_at;
           return print; // Devuelve el objeto Print actualizado
         })
       );

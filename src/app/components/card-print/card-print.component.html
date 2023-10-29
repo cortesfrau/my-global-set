@@ -1,27 +1,41 @@
 <div class="card-print">
 
+  <div class="card-print_body">
 
-  <div class="card-print_left">
-    <img class="card-print_image" src="{{ print.image_uri }}" alt="{{ card.name }} - {{ print.set_name }}">
-  </div>
+    <div class="card-print_left">
+      <img class="card-print_image" src="{{ print.image_uri }}" alt="{{ card.name }} - {{ print.set_name }}">
+    </div>
 
-  <div class="card-print_right">
+    <div class="card-print_right">
 
 
-    <div class="card-print_header">
+      <div class="card-print_header">
 
-      <div class="card-print_header__left">
-        <img class="card-print_set-icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
-      </div>
+        <div class="card-print_header__left">
+          <img class="card-print_set-icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
+        </div>
 
-      <div class="card-print_header__right">
-        <h3 class="card-print_name">{{ card.name }}</h3>
-        <h4 class="card-print_set-name">{{ print.set_name }}</h4>
+        <div class="card-print_header__right">
+          <h3 class="card-print_name">{{ card.name }}</h3>
+          <h4 class="card-print_set-name">{{ print.set_name }}</h4>
+
+        </div>
 
       </div>
 
     </div>
 
+  </div>
+
+
+
+  <div class="card-print_footer">
+    <div class="card-print_footer__left">
+      <span class="card-print_artist">Illus. © {{ print.artist }}</span>
+    </div>
+    <div class="card-print_footer__right">
+      <span class="card-print_date">{{ print.set_release_date | date:'yyyy' }}</span>
+    </div>
   </div>
 
 </div>

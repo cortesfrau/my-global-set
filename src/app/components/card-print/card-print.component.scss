@@ -5,10 +5,14 @@
 //--- Card Print Styles ---//
 //-------------------------//
 .card-print {
-  padding: .5rem;
-  background-color: $white;
+  background-color: rgba($color: $white, $alpha: .5);
+  box-shadow: $box-shadow-sm;
   border-radius: $border-radius;
-  display: flex;
+
+  &_body {
+    padding: .75rem;
+    display: flex;
+  }
 
   &_left {
     width: calc(40% - .5rem);
@@ -20,17 +24,22 @@
     margin-left: .5rem;
   }
 
+  &_image {
+    border-radius: 4.75% / 3.5%;
+    box-shadow: 0 .125rem .25rem rgba($black, .35);;
+  }
+
   &_header {
     display: flex;
     margin-bottom: .5rem;
 
     &__left {
-      width: 27%;
+      width: 25%;
       margin-right: .5rem;
     }
 
     &__right {
-      width: 73%;
+      width: 75%;
       margin-left: .5rem;
     }
   }
@@ -44,7 +53,7 @@
   &_set-icon {
     margin-top: .25rem;
     width: 100%;
-    max-height: 40px;
+    max-height: 35px;
   }
 
   &_set-name {
@@ -53,5 +62,11 @@
     margin-bottom: 0;
   }
 
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .75rem;
+  }
 }
 
