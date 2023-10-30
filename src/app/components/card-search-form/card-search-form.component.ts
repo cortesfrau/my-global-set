@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { scryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
-import { switchMap, timer } from 'rxjs';
+import { catchError, switchMap, throwError, timer } from 'rxjs';
 
 @Component({
   selector: 'app-card-search-form',
@@ -12,57 +12,89 @@ import { switchMap, timer } from 'rxjs';
 
 export class CardSearchFormComponent implements OnInit, OnDestroy {
 
-  card!: Card;
-
-  cardForm = new FormGroup({
+  cardForm: FormGroup = new FormGroup({
     cardName: new FormControl(''),
   });
 
+
+  card!: Card;
+
+  submitted = false;
+
   isLoading: boolean = false;
 
-  constructor(private scryfallService: scryfallService) {}
+  constructor(
+    private scryfallService: scryfallService,
+    private formBuilder: FormBuilder
+  ) {}
 
 
   ngOnDestroy() {
-    // Al destruir el componente, guardamos la última carta buscada en localStorage
+
+    // On component destroy save the last searched card into local storage
     if (this.card) {
       localStorage.setItem('lastSearchedCard', JSON.stringify(this.card));
     }
   }
 
   ngOnInit(): void {
-    // Al inicializar el componente, intentamos cargar la última carta buscada desde localStorage
+
+    this.cardForm = this.formBuilder.group({
+      cardName: ['', Validators.required]
+    });
+
+    // Try to load last searched card from local storage
     const lastSearchedCard = localStorage.getItem('lastSearchedCard');
     if (lastSearchedCard) {
       this.card = JSON.parse(lastSearchedCard);
-      // Rellenar el campo del formulario con el nombre de la última carta
-      this.cardForm.get('cardName')?.setValue(this.card.name);
+
+      // Fill the form input with the last searched card name
+      this.f['cardName']?.setValue(this.card.name);
     }
+  }
+
+  // Form getter
+  get f(): { [key: string]: AbstractControl } {
+    return this.cardForm.controls;
   }
 
   onSubmit() {
-    this.isLoading = true;
-    const cardNameControl = this.cardForm.get('cardName');
-    if (cardNameControl && cardNameControl.value) {
-      const cardName = cardNameControl.value;
-      this.scryfallService.getCardOracleIdByName(cardName).pipe(
-        switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
-      ).subscribe((card) => {
-        this.scryfallService.addExtraInfoToPrints(card).subscribe((updatedCard) => {
-          this.card = updatedCard;
-          console.log(this.card);
 
-          timer(500).subscribe(() => {
-            this.isLoading = false;
+    this.submitted = true;
+
+    // Check if form is valid
+    if (this.cardForm.valid) {
+
+      this.isLoading = true;
+
+      const cardNameControl = this.cardForm.get('cardName');
+      if (cardNameControl && cardNameControl.value) {
+        const cardName = cardNameControl.value;
+        this.scryfallService.getCardOracleIdByName(cardName).pipe(
+          switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
+        ).subscribe((card) => {
+          this.scryfallService.addExtraInfoToPrints(card).subscribe((updatedCard) => {
+            this.card = updatedCard;
+
+            // Show card info on console
+            console.log(this.card);
+
+            timer(500).subscribe(() => {
+              this.isLoading = false;
+            });
+
+            // Save last searched card into local storage and update input value
+            if (this.card) {
+              localStorage.setItem('lastSearchedCard', JSON.stringify(this.card));
+              this.f['cardName']?.setValue(this.card.name);
+            }
+
           });
-
-          // Guardar la última carta buscada en localStorage al completar la búsqueda
-          if (this.card) {
-            localStorage.setItem('lastSearchedCard', JSON.stringify(this.card));
-          }
         });
-      });
+      }
     }
   }
+
+
 
 }

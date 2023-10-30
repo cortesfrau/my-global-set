@@ -1,6 +1,5 @@
 <app-loader *ngIf="isLoading"></app-loader>
 
-
 <section class="py-4">
 
   <div class="container">
@@ -12,13 +11,19 @@
 
         <form class="row justify-content-center g-2" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
           <div class="col-md-9">
-            <input type="text" class="form-control" formControlName="cardName">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="showOnlineVersions">
-              <label class="form-check-label" for="showOnlineVersions">
-                Show online versions
-              </label>
+
+            <div class="form-floating mb-3">
+
+              <input id="cardName" type="text" formControlName="cardName" class="form-control" placeholder="Card name" [ngClass]="{ 'is-invalid': submitted && f['cardName'].errors }" required />
+              <label for="cardName">Card Name</label>
+              <div *ngIf="submitted && f['cardName'].errors" class="invalid-feedback">
+                <div *ngIf="f['cardName'].errors['required']">Card name is required.</div>
+              </div>
+
             </div>
+
+
+
           </div>
           <div class="col-md-3">
             <button class="btn btn-primary" type="submit">Search card</button>
@@ -28,9 +33,6 @@
       </div>
     </div>
   </div>
-
-
-
 
 </section>
 

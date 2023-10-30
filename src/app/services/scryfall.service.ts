@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, map, forkJoin, expand, of, reduce } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, map, forkJoin, expand, of, reduce, catchError, throwError } from 'rxjs';
 
 import { Card } from '../models/card.interface';
 import { Print } from '../models/print.interface';
@@ -21,6 +21,22 @@ export class scryfallService {
     this.urlScryfallApi = 'https://api.scryfall.com/';
 
   }
+
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
 
   // Define the default language (English) here or load it from your language data
   defaultLanguage: Language = LanguagesData[1];
@@ -49,7 +65,8 @@ export class scryfallService {
     return this.http.get(apiUrl).pipe(
       map((data: any) => {
         return data.oracle_id;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
@@ -61,12 +78,21 @@ export class scryfallService {
     );
   }
 
-  // Get set by ID
+  /**
+   * Get Magic Set by ID
+   * @param setId
+   * @returns
+   */
   getSetById(setId: string): Observable<any> {
     const apiUrl = `${this.urlScryfallApi}sets/${encodeURIComponent(setId)}`;
     return this.http.get(apiUrl);
   }
 
+  /**
+   * Add extra info to the card instance
+   * @param card
+   * @returns
+   */
   addExtraInfoToPrints(card: Card): Observable<Card> {
     const observables: Observable<Print>[] = card.prints.map((print: Print) => {
       return this.getSetById(print.set_id).pipe(
@@ -77,11 +103,6 @@ export class scryfallService {
           if (setLanguages) {
             print.languages = setLanguages.map((languageId) => LanguagesData[languageId]);
           } else {
-            print.languages = []; // Set to an empty array if no languages are specified
-          }
-
-          // Check if the print has languages; if not, use the default language
-          if (!print.languages || print.languages.length === 0) {
             print.languages = [this.defaultLanguage];
           }
 

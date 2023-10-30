@@ -5,13 +5,20 @@
 //--- Card Print Styles ---//
 //-------------------------//
 .card-print {
-  background-color: rgba($color: $white, $alpha: .5);
-  box-shadow: $box-shadow-sm;
+  background-color: $white;
+  // box-shadow: $box-shadow;
   border-radius: $border-radius;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $gray-300;
 
+  // Card print header
   &_header {
     display: flex;
-    padding: 1rem 1rem .5rem 1rem;
+    padding: .75rem 1rem .75rem 1rem;
+    border-bottom: 1px solid $gray-200;
+    background-color: $light;
 
     &__left {
       width: auto;
@@ -28,52 +35,63 @@
     }
   }
 
-  &_set-icon {
-    width: 100%;
-    max-height: 40px;
-    max-width: 50px;
-  }
-
-  &_set-name {
-    font-size: $font-size-sm;
-    line-height: $line-height-sm;
-    margin-bottom: 0;
-  }
-
+  // Card print body
   &_body {
-    padding: .5rem 1rem;
+    padding: 1rem;
     display: flex;
 
     &__left {
-      width: calc(40% - .5rem);
-      margin-right: .5rem;
+      width: calc(40% - .75rem);
+      margin-right: .75rem;
     }
 
     &__right {
-      width: calc(60% - .5rem);
-      margin-left: .5rem;
+      width: calc(60% - .75rem);
+      margin-left: .75rem;
     }
   }
 
-  &_image {
-    border-radius: 4.75% / 3.5%;
-    box-shadow: 0 .125rem .25rem rgba($black, .35);;
+  // Card print footer
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 1rem .5rem 1rem;
+    margin: auto 0 0 0;
+    font-size: $font-size-sm;
+    border-top: 1px solid $gray-200;
+    background-color: $light;
   }
 
+  // Card print set icon
+  &_set-icon {
+    width: 100%;
+    max-height: 36px;
+    max-width: 40px;
+  }
+
+  // Card print name
   &_name {
     font-size: $font-size-base;
     margin-bottom: .25rem;
     font-weight: $font-weight-bold;
   }
 
-  &_footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem 1rem 1rem 1rem;
+  // Card print set name
+  &_set-name {
+    font-size: $font-size-sm;
+    line-height: $line-height-sm;
+    margin-bottom: 0;
+    font-style: italic;
   }
 
-  // Languages List
+  // Card print image
+  &_image {
+    border-radius: 4.75% / 3.5%;
+    box-shadow: 0 .125rem .25rem rgba($black, .35);;
+  }
+
+  // Card print languages list
   &_langs {
     list-style-type: none;
     font-size: $font-size-sm;

@@ -3,13 +3,28 @@
 //-----------------------------//
 
 // Colors
+
+$gray-100: #f5f7fa;
+$gray-200: #e6eaf0;
+$gray-300: #d7dde6;
+$gray-400: #c9ccd8;
+$gray-500: #b7c2cf;
+$gray-600: #687079;
+$gray-700: #43494f;
+$gray-800: #2f343b;
+$gray-900: #1c2127;
+
+
 $white: #fff;
 $black: #000;
+$light: $gray-100;
+$dark: $gray-900;
 $primary: #501dff;
 
+
 // Body
-$body-bg: #d6e0e3;
-$body-color: #13044F;
+$body-bg: $gray-200;
+$body-color: $dark;
 
 // Typo
 $font-family-base: 'Lato', sans-serif;
@@ -17,8 +32,8 @@ $font-weight-light: 300;
 $font-weight-base: 400;
 $font-weight-bold: 700;
 $font-size-base: 1rem;
-$font-size-sm: .75rem;
-$font-size-lg: 1.25rem;
+$font-size-sm: .80rem;
+$font-size-lg: 1.2rem;
 
 // Line Height
 $line-height-base: 1.5;
@@ -40,10 +55,10 @@ $input-btn-padding-x: 1.5rem;
 
 // Forms
 $input-bg: $white;
+$form-floating-label-opacity: .5;
+
 
 // Cards
 $card-bg: $white;
 $card-border-width: 0;
-
-
 
