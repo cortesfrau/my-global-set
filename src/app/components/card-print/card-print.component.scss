@@ -60,7 +60,7 @@
   // Card print extras
   &_extras {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     margin-top: auto;
     padding: .5rem;
@@ -127,7 +127,7 @@
   &_badge {
     display: flex;
     align-items: center;
-    border: 1px solid $gray-300;
+    border: 1px solid $gray-200;
     padding: .5rem .75rem;
     border-radius: $border-radius;
     font-size: $font-size-sm;
