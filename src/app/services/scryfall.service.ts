@@ -49,7 +49,7 @@ export class scryfallService {
       set_name: printData.set_name,
       set_code: printData.set,
       image_uri: printData.image_uris.png,
-      border_color: printData.border_color,
+      border: printData.border_color,
       foil: printData.foil,
       digital: printData.digital,
     }));

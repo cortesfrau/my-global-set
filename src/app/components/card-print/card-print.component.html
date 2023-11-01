@@ -12,6 +12,8 @@
     </div>
   </div>
 
+
+
   <div class="card-print_body">
 
     <div class="card-print_body__left">
@@ -19,7 +21,6 @@
     </div>
 
     <div class="card-print_body__right">
-      <p class="card-print_border"><strong>Border: </strong>{{ print.border_color }}</p>
       <ul class="card-print_langs">
         <li *ngFor="let language of print.languages">
           <span class="card-print_langs__flag {{ language.flag_icon }}"></span>
@@ -31,15 +32,15 @@
   </div>
 
   <div class="card-print_extras" *ngIf="print.foil == true || print.digital == true">
-    <div *ngIf="print.foil == true">
-      <div class="card-print_badge">
-        <i class="bi bi-stars"></i>Foil
-      </div>
+    <div class="card-print_badge">
+     <span class="text-capitalize">{{ print.border }}</span>
+     <span *ngIf="print.border == 'white' || print.border == 'black'">&nbsp;border</span>
     </div>
-    <div *ngIf="print.digital == true">
-      <div class="card-print_badge">
-        <i class="bi bi-cloud-fill"></i>Digital
-      </div>
+    <div class="card-print_badge" *ngIf="print.foil == true">
+      <i class="bi bi-stars"></i>Foil
+    </div>
+    <div class="card-print_badge" *ngIf="print.digital == true">
+      <i class="bi bi-cloud-fill"></i>Digital
     </div>
   </div>
 
