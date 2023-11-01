@@ -8,7 +8,7 @@
 
     <div class="card-print_header__center">
       <h3 class="card-print_name">{{ card.name }}</h3>
-      <h4 class="card-print_set-name">{{ print.set_name }}</h4>
+      <h4 class="card-print_set-name">{{ print.set_name }} <span *ngIf="print.foil == true">(Foil)</span></h4>
     </div>
 
     <div class="card-print_header__right">
@@ -30,7 +30,6 @@
     <div class="card-print_body__right">
 
       <!-- <p>Border color: {{ print.border_color }}</p> -->
-
 
       <ul class="card-print_langs">
         <li *ngFor="let language of print.languages">
