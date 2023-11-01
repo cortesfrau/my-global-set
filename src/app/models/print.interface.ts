@@ -10,7 +10,7 @@ export interface Print {
   set_code: string,
   set_icon: string,
   set_release_date: string,
-  has_foil: boolean,
+  foil: boolean,
   border_color: string,
   languages: Language[]
 }

@@ -50,6 +50,7 @@ export class scryfallService {
       set_code: printData.set,
       image_uri: printData.image_uris.png,
       border_color: printData.border_color,
+      foil: printData.foil,
     }));
 
     return {
@@ -108,7 +109,7 @@ export class scryfallService {
 
           // Add other properties to the print
           print.set_icon = setInfo.icon_svg_uri;
-          print.has_foil = !setInfo.nonfoil_only;
+          // print.has_foil = !setInfo.nonfoil_only;
           print.set_release_date = setInfo.released_at;
 
           return print; // Return the updated Print object

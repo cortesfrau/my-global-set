@@ -6,10 +6,17 @@
       <img class="card-print_set-icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
     </div>
 
-    <div class="card-print_header__right">
+    <div class="card-print_header__center">
       <h3 class="card-print_name">{{ card.name }}</h3>
       <h4 class="card-print_set-name">{{ print.set_name }}</h4>
+    </div>
 
+    <div class="card-print_header__right">
+      <div *ngIf="print.foil == true">
+        <div class="card-print_foil">
+          <i class="bi bi-stars"></i>Foil
+        </div>
+      </div>
     </div>
 
   </div>
