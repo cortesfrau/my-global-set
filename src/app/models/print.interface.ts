@@ -12,5 +12,6 @@ export interface Print {
   set_release_date: string,
   foil: boolean,
   border_color: string,
+  digital: boolean,
   languages: Language[]
 }

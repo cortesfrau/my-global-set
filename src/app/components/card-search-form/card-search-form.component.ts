@@ -23,6 +23,8 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
   isLoading: boolean = false;
 
+  showDigitalPrints: boolean = false;
+
   constructor(
     private scryfallService: scryfallService,
     private formBuilder: FormBuilder
@@ -58,21 +60,32 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     return this.cardForm.controls;
   }
 
-  onSubmit() {
+  // Toggle the show digital prints property
+  toggleShowDigitalPrints() {
+    this.showDigitalPrints = !this.showDigitalPrints;
+  }
 
+
+  onSubmit() {
     this.submitted = true;
 
     // Check if form is valid
     if (this.cardForm.valid) {
-
       this.isLoading = true;
-
       const cardNameControl = this.cardForm.get('cardName');
       if (cardNameControl && cardNameControl.value) {
         const cardName = cardNameControl.value;
         this.scryfallService.getCardOracleIdByName(cardName).pipe(
           switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
         ).subscribe((card) => {
+
+
+
+          // Apply filter based on showDigitalPrints
+          if (!this.showDigitalPrints) {
+            card.prints = card.prints.filter((print) => !print.digital);
+          }
+
           this.scryfallService.addExtraInfoToPrints(card).subscribe((updatedCard) => {
             this.card = updatedCard;
 
@@ -88,12 +101,12 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
               localStorage.setItem('lastSearchedCard', JSON.stringify(this.card));
               this.f['cardName']?.setValue(this.card.name);
             }
-
           });
         });
       }
     }
   }
+
 
 
 

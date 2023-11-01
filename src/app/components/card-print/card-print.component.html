@@ -8,17 +8,16 @@
       <h4 class="card-print_set-name">{{ print.set_name }} <span *ngIf="print.foil == true">(Foil)</span></h4>
     </div>
     <div class="card-print_header__right">
-      <div *ngIf="print.foil == true">
-        <div class="card-print_foil">
-          <i class="bi bi-stars"></i>Foil
-        </div>
-      </div>
+
     </div>
   </div>
+
   <div class="card-print_body">
+
     <div class="card-print_body__left">
       <img class="card-print_image" src="{{ print.image_uri }}" alt="{{ card.name }} - {{ print.set_name }}">
     </div>
+
     <div class="card-print_body__right">
       <p class="card-print_border"><strong>Border: </strong>{{ print.border_color }}</p>
       <ul class="card-print_langs">
@@ -27,8 +26,23 @@
           <span class="card-print_langs__name">{{ language.name }}</span>
         </li>
       </ul>
+
     </div>
   </div>
+
+  <div class="card-print_extras" *ngIf="print.foil == true || print.digital == true">
+    <div *ngIf="print.foil == true">
+      <div class="card-print_badge">
+        <i class="bi bi-stars"></i>Foil
+      </div>
+    </div>
+    <div *ngIf="print.digital == true">
+      <div class="card-print_badge">
+        <i class="bi bi-cloud-fill"></i>Digital
+      </div>
+    </div>
+  </div>
+
   <div class="card-print_footer">
     <div class="card-print_footer__left">
       <span class="card-print_artist">Illus. © {{ print.artist }}</span>

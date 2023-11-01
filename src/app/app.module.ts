@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardPrintListComponent } from './components/card-print-list/card-print-list.component';
 import { CardPrintComponent } from './components/card-print/card-print.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,14 +17,15 @@ import { LoaderComponent } from './components/loader/loader.component';
     CardSearchFormComponent,
     CardPrintListComponent,
     CardPrintComponent,
-    LoaderComponent
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
