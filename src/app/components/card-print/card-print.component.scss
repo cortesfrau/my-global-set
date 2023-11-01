@@ -134,6 +134,18 @@
     margin-left: .5rem;
     background-color: $light;
 
+    .icon-border {
+      font-size: $font-size-sm * .8;
+
+      &--black {
+        color: $black;
+      }
+
+      &--gold {
+        color: $gold;
+      }
+    }
+
     i {
       margin-right: .5rem;
     }
