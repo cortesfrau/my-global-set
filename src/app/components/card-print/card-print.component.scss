@@ -63,7 +63,32 @@
     justify-content: flex-end;
     align-items: center;
     margin-top: auto;
-    padding: .5rem;
+    border-top: 1px solid $gray-200;
+    background-color: $light;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      border-left: 1px solid $gray-200;
+      padding: .5rem 1rem;
+      font-size: $font-size-sm;
+
+      .icon-border {
+        font-size: $font-size-sm * .7;
+
+        &--black {
+          color: $black;
+        }
+
+        &--gold {
+          color: $gold;
+        }
+      }
+
+      i {
+        margin-right: .5rem;
+      }
+    }
   }
 
   // Card print footer
@@ -122,34 +147,5 @@
       margin-right: .5rem;
     }
   }
-
-  // Badges
-  &_badge {
-    display: flex;
-    align-items: center;
-    border: 1px solid $gray-200;
-    padding: .5rem .75rem;
-    border-radius: $border-radius;
-    font-size: $font-size-sm;
-    margin-left: .5rem;
-    background-color: $light;
-
-    .icon-border {
-      font-size: $font-size-sm * .8;
-
-      &--black {
-        color: $black;
-      }
-
-      &--gold {
-        color: $gold;
-      }
-    }
-
-    i {
-      margin-right: .5rem;
-    }
-  }
-
 }
 

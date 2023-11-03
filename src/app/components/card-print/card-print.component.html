@@ -32,17 +32,17 @@
 
   <!-- Print Extras : START -->
   <div class="card-print_extras">
-    <div class="card-print_badge">
+    <div class="card-print_extras__item">
       <i *ngIf="print.border != 'borderless' && print.border != 'white'" class="bi bi-circle-fill icon-border icon-border--{{ print.border }}"></i>
       <i *ngIf="print.border == 'white'" class="bi bi-circle icon-border icon-border--{{ print.border }}"></i>
       <i *ngIf="print.border == 'borderless'" class="bi bi-x-circle icon-border icon-border--{{ print.border }}"></i>
       <span class="text-capitalize">{{ print.border }}</span>
       <span *ngIf="print.border != 'borderless'">&nbsp;border</span>
     </div>
-    <div class="card-print_badge" *ngIf="print.foil == true">
+    <div class="card-print_extras__item" *ngIf="print.foil == true">
       <i class="bi bi-stars"></i>Foil
     </div>
-    <div class="card-print_badge" *ngIf="print.digital == true">
+    <div class="card-print_extras__item" *ngIf="print.digital == true">
       <i class="bi bi-cloud-fill"></i>Digital
     </div>
   </div>
