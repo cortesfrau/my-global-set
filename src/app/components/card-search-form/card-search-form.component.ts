@@ -65,6 +65,10 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.showDigitalPrints = !this.showDigitalPrints;
   }
 
+  searchCardByName(cardName: string): void {
+    this.f['cardName'].setValue(cardName);
+    this.onSubmit();
+  }
 
   onSubmit() {
     this.submitted = true;
