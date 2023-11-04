@@ -38,20 +38,15 @@
       <i *ngIf="print.border == 'borderless'" class="bi bi-x-circle icon-border icon-border--{{ print.border }}"></i>
       <span class="text-capitalize">{{ print.border }}</span>
     </div>
-
-
     <div class="card-print_extras__item" *ngIf="print.foil == true && print.nonfoil == true">
       <i class="bi bi-stars"></i>Foil available
     </div>
-
     <div class="card-print_extras__item" *ngIf="print.foil == true && print.nonfoil == false">
       <i class="bi bi-stars"></i>Foil only
     </div>
-
     <div class="card-print_extras__item" *ngIf="print.foil == false && print.nonfoil == true">
       <i class="bi bi-stars"></i>Nonfoil only
     </div>
-
     <div class="card-print_extras__item" *ngIf="print.digital == true">
       <i class="bi bi-cloud-fill"></i>Digital
     </div>
