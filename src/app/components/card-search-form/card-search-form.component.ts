@@ -16,7 +16,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     cardName: new FormControl(''),
   });
 
-
   card!: Card;
 
   submitted = false;
@@ -29,7 +28,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     private scryfallService: scryfallService,
     private formBuilder: FormBuilder
   ) {}
-
 
   ngOnDestroy() {
 
@@ -65,6 +63,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.showDigitalPrints = !this.showDigitalPrints;
   }
 
+  // Search card by name. Useful to search cards by link.
   searchCardByName(cardName: string): void {
     this.f['cardName'].setValue(cardName);
     this.onSubmit();
@@ -83,8 +82,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
           switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
         ).subscribe((card) => {
 
-
-
           // Apply filter based on showDigitalPrints
           if (!this.showDigitalPrints) {
             card.prints = card.prints.filter((print) => !print.digital);
@@ -96,7 +93,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
             // Show card info on console
             console.log(this.card);
 
-            timer(500).subscribe(() => {
+            timer(250).subscribe(() => {
               this.isLoading = false;
             });
 
