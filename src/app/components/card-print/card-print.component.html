@@ -7,7 +7,7 @@
     </div>
     <div class="card-print_header__center">
       <h3 class="card-print_name">{{ card.name }}</h3>
-      <h4 class="card-print_set-name">{{ print.set_name }} <span *ngIf="print.foil == true">(Foil)</span></h4>
+      <h4 class="card-print_set-name">{{ print.set_name }}</h4>
     </div>
     <div class="card-print_header__right">
     </div>
@@ -37,13 +37,26 @@
       <i *ngIf="print.border == 'white'" class="bi bi-circle icon-border icon-border--{{ print.border }}"></i>
       <i *ngIf="print.border == 'borderless'" class="bi bi-x-circle icon-border icon-border--{{ print.border }}"></i>
       <span class="text-capitalize">{{ print.border }}</span>
-      <span *ngIf="print.border != 'borderless'">&nbsp;border</span>
     </div>
-    <div class="card-print_extras__item" *ngIf="print.foil == true">
-      <i class="bi bi-stars"></i>Foil
+
+
+    <div class="card-print_extras__item" *ngIf="print.foil == true && print.nonfoil == true">
+      <i class="bi bi-stars"></i>Foil available
     </div>
+
+    <div class="card-print_extras__item" *ngIf="print.foil == true && print.nonfoil == false">
+      <i class="bi bi-stars"></i>Foil only
+    </div>
+
+    <div class="card-print_extras__item" *ngIf="print.foil == false && print.nonfoil == true">
+      <i class="bi bi-stars"></i>Nonfoil only
+    </div>
+
     <div class="card-print_extras__item" *ngIf="print.digital == true">
       <i class="bi bi-cloud-fill"></i>Digital
+    </div>
+    <div class="card-print_extras__item" *ngIf="print.digital == false">
+      <i class="bi bi-file-text-fill"></i>Paper
     </div>
   </div>
   <!-- Print Extras : END -->

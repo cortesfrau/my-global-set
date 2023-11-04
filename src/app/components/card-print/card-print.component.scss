@@ -43,7 +43,7 @@
 
   // Card print body
   &_body {
-    padding: 1rem 1rem .5rem;
+    padding: 1rem;
     display: flex;
 
     &__left {
@@ -70,7 +70,7 @@
       display: flex;
       align-items: center;
       border-left: 1px solid $gray-200;
-      padding: .5rem 1rem;
+      padding: .5rem .75rem;
       font-size: $font-size-sm;
 
       .icon-border {
@@ -88,6 +88,10 @@
       i {
         margin-right: .5rem;
       }
+
+      &:first-child {
+        border: 0;
+      }
     }
   }
 
@@ -96,7 +100,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: .5rem 1rem .5rem 1rem;
+    padding: .5rem .75rem;
     font-size: $font-size-sm;
     border-top: 1px solid $gray-200;
     background-color: $light;

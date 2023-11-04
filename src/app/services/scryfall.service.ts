@@ -51,6 +51,7 @@ export class scryfallService {
       image_uri: printData.image_uris.png,
       border: printData.border_color,
       foil: printData.foil,
+      nonfoil: printData.nonfoil,
       digital: printData.digital,
     }));
 
