@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardPrintListComponent } from './components/card-print-list/card-print-list.component';
 import { CardPrintComponent } from './components/card-print/card-print.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     CardPrintListComponent,
     CardPrintComponent,
     LoaderComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
