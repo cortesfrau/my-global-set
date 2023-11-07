@@ -5,32 +5,6 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7">
-        <div class="mb-3">
-          <h2 class="text-center mb-3">Search a <span class="fw-bold">Magic: the Gathering</span> card to discover all its <span class="fw-bold">printed versions</span></h2>
-          <p>Some examples of cards to search:</p>
-          <ul>
-            <li>
-              <strong>
-                <a href="javascript:void(0);" (click)="searchCardByName('Black Lotus')">Black Lotus</a>
-              </strong>: most famous Magic: The Gathering card.
-            </li>
-            <li>
-              <strong>
-                <a href="javascript:void(0);" (click)="searchCardByName('Lightning Bolt')">Lightning Bolt</a>
-              </strong>: bolt the bird!
-            </li>
-            <li>
-              <strong>
-                <a href="javascript:void(0);" (click)="searchCardByName('Drudge Skeletons')">Drudge Skeletons</a>
-              </strong>: my friend Guillem really loves skeletons.
-            </li>
-            <li>
-              <strong>
-                <a href="javascript:void(0);" (click)="searchCardByName('Ancestral Recall')">Ancestral Recall</a>
-              </strong>: drawing three cards is always a good thing, right?
-            </li>
-          </ul>
-        </div>
 
         <form class="row justify-content-center g-2" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
           <div class="col-12">

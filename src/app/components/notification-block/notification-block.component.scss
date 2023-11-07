@@ -1,0 +1,33 @@
+// Custom SCSS Variables
+@import "./../../../shared/styles/variables";
+
+//---------------------------------//
+//--- Notification Block Styles ---//
+//---------------------------------//
+.notification-block {
+  background-color: $primary;
+  color: $white;
+  padding: 1rem 0;
+
+  &_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+
+    h4 {
+      margin-bottom: .5rem;
+      font-size: $font-size-lg;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &_body {
+
+  }
+
+}
+

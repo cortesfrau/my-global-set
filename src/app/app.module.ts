@@ -10,6 +10,8 @@ import { CardPrintListComponent } from './components/card-print-list/card-print-
 import { CardPrintComponent } from './components/card-print/card-print.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NotificationBlockComponent } from './components/notification-block/notification-block.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CardPrintComponent,
     LoaderComponent,
     NavbarComponent,
+    FooterComponent,
+    NotificationBlockComponent,
   ],
   imports: [
     BrowserModule,
