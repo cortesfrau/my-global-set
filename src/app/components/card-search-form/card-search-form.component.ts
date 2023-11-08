@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { scryfallService } from 'src/app/services/scryfall.service';
+import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
 import { Observable, catchError, of, switchMap, throwError, timer } from 'rxjs';
 
@@ -26,9 +26,12 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
   // Flag to decide whether to show digital prints in the results.
   showDigitalPrints: boolean = false;
 
+  // User friendly error message
+  errorMessage: string | null = null;
+
   // Dependency injection of the ScryfallService and FormBuilder.
   constructor(
-    private scryfallService: scryfallService,
+    private scryfallService: ScryfallService,
     private formBuilder: FormBuilder
   ) {
     // Initialize the form group with the form controls.
@@ -65,17 +68,21 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.showDigitalPrints = !this.showDigitalPrints;
   }
 
-  // Initiates a card search by name.
-  searchCardByName(cardName: string): void {
-    this.cardForm.patchValue({ cardName });
-    this.onSubmit();
-  }
-
   // Fetch card data by name from the Scryfall API.
   private fetchCardByName(cardName: string): Observable<Card> {
     return this.scryfallService.getCardOracleIdByName(cardName).pipe(
       switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
     );
+  }
+
+  // Method to reset the form and clear the state.
+  clearForm(): void {
+    this.cardForm.reset(); // Resets the form values.
+    this.card = {} as Card; // Resets the current card information.
+    this.submitted = false; // Resets the 'submitted' state.
+    this.isLoading = false; // Can reset the loading state if necessary.
+    this.errorMessage = null; // Reset search errors.
+    localStorage.removeItem('lastSearchedCard'); // Clears the card stored in localStorage.
   }
 
   // Filters out digital prints from the card's print array if needed.
@@ -103,28 +110,51 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
   // Event handler for form submission.
   onSubmit(): void {
+    // Set the 'submitted' flag to true indicating the form has been attempted to be submitted.
     this.submitted = true;
+    // Clear any existing error messages when a new form submission is attempted.
+    this.errorMessage = null;
+
+    // Check if the form is valid based on the defined Validators.
     if (this.cardForm.valid) {
+      // Indicate that the application is in a loading state, which can be used to display a loader in the UI.
       this.isLoading = true;
-      this.fetchCardByName(this.f['cardName'].value)
+
+      // Start by fetching the card's Oracle ID using the card name provided in the form.
+      this.scryfallService.getCardOracleIdByName(this.f['cardName'].value)
         .pipe(
-          catchError(err => {
-            // Log and handle errors appropriately.
-            console.error(err);
-            return throwError(() => new Error('Failed to fetch card data'));
-          }),
-          switchMap(card => this.filterDigitalPrintsIfNeeded(card)),
-          switchMap(card => this.scryfallService.addExtraInfoToPrints(card))
+          // Use the Oracle ID to fetch the full card data.
+          switchMap((oracleId: string) => this.scryfallService.getCardByOracleId(oracleId)),
+          // Filter the card's prints based on the 'showDigitalPrints' flag.
+          switchMap((card: Card) => this.filterDigitalPrintsIfNeeded(card)),
+          // Enrich the card prints with additional information from other API endpoints.
+          switchMap((card: Card) => this.scryfallService.addExtraInfoToPrints(card))
         )
         .subscribe({
-          next: (card) => this.handleCardData(card),
-          error: (error) => {
-            // Error handling logic, such as displaying a message to the user.
+          // Handle the successful response by updating the UI with the card data.
+          next: (card: Card) => {
+            this.handleCardData(card);
+            // Loading is complete, so set the loading state to false.
             this.isLoading = false;
-            // ...
           },
-          complete: () => this.isLoading = false // Clean up actions after subscription.
+          // Handle any errors that occur during the API call sequence.
+          error: (error: { message: string | null; }) => {
+            // On error, set loading to false and show the error message.
+            this.isLoading = false;
+            this.errorMessage = error.message;
+            console.error('Error fetching card data:', error);
+          },
+          // Once the observable completes, ensure that the loading indicator is turned off.
+          complete: () => {
+            this.isLoading = false;
+          }
         });
+    } else {
+      // If the form is not valid, set an appropriate error message to display in the UI.
+      this.errorMessage = 'Please ensure the form is filled out correctly.';
     }
   }
+
+
 }
+

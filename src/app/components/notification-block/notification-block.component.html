@@ -2,8 +2,8 @@
   <div class="container">
     <div class="notification-block_header">
       <div>
-        <h4>What is My Global Set?</h4>
-        <p>A tool for <i>global setters</i></p>
+        <h4>What is <strong>My Global Set</strong>?</h4>
+        <p>A tool for <i>global setters...</i></p>
       </div>
       <button (click)="toggleCollapse()" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#notification" aria-expanded="false" aria-controls="notification">
         <i class="bi" [class.bi-chevron-down]="!collapseIsOpen" [class.bi-x-lg]="collapseIsOpen"></i>
@@ -13,39 +13,27 @@
     <div class="notification-block_body collapse" id="notification">
 
       <p>
-        My Global Set is an application tailored for global set collectors of Magic: The Gathering cards from around the world.
+        <strong>My Global Set</strong> is an application tailored for global set collectors of Magic: The Gathering cards from around the world.
         It offers a comprehensive search tool that catalogs every printed edition of individual cards, allowing collectors
         to streamline their search and manage their acquisitions with ease. This platform is designed to help enthusiasts
         locate and track down the exact versions of cards they need to complete their collections.
       </p>
 
-      <!-- <h2 class="text-center mb-3">Search a <span class="fw-bold">Magic: the Gathering</span> card to discover all its <span class="fw-bold">printed versions</span></h2>
-      <p>Some examples of cards to search:</p>
+      <p>Some examples of Magic: the Gathering cards to search:</p>
       <ul>
         <li>
-          <strong>
-            <a href="javascript:void(0);" (click)="searchCardByName('Black Lotus')">Black Lotus</a>
-          </strong>: most famous Magic: The Gathering card.
+          <strong>Black Lotus</strong>: most famous Magic: the Gathering card.
         </li>
         <li>
-          <strong>
-            <a href="javascript:void(0);" (click)="searchCardByName('Lightning Bolt')">Lightning Bolt</a>
-          </strong>: bolt the bird!
+          <strong>Lightning Bolt</strong>: bolt the bird!
         </li>
         <li>
-          <strong>
-            <a href="javascript:void(0);" (click)="searchCardByName('Drudge Skeletons')">Drudge Skeletons</a>
-          </strong>: my friend Guillem really loves skeletons.
+          <strong>Drudge Skeletons</strong>: my friend Guillem really loves skeletons.
         </li>
         <li>
-          <strong>
-            <a href="javascript:void(0);" (click)="searchCardByName('Ancestral Recall')">Ancestral Recall</a>
-          </strong>: drawing  cards is always a good thing, right?
+          <strong>Ancestral Recall</strong>: drawing  cards is always a good thing, right?
         </li>
-      </ul> -->
-
-
-
+      </ul>
 
     </div>
   </div>

@@ -1,0 +1,28 @@
+// Custom SCSS Variables
+@import "./../../../shared/styles/variables";
+
+//------------------------------------//
+//--- Card Search Component Styles ---//
+//------------------------------------//
+
+// Reset button for input
+.form-floating .btn-reset {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  i {
+    font-size: 1.75rem;
+    color: $gray-500;
+    font-weight: $font-weight-bold;
+    transition: $transition-base;
+
+    &:hover {
+      color: $body-color;
+    }
+  }
+}
