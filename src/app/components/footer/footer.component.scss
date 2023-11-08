@@ -1,0 +1,12 @@
+// Custom SCSS Variables
+@import "./../../../shared/styles/variables";
+
+//--------------------------//
+//--- Site Footer Styles ---//
+//--------------------------//
+#site-footer {
+  background-color: $dark;
+  padding: 3rem 0;
+  color: $light;
+  text-align: center;
+}

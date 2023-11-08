@@ -12,7 +12,7 @@
           {{ errorMessage }}
         </div>
 
-        <form class="row justify-content-center g-2" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+        <form class="row justify-content-center g-2 py-4" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
           <div class="col-12">
 
             <div class="form-floating position-relative">
@@ -47,8 +47,9 @@
     </div>
   </div>
 
+  <section>
+    <app-card-print-list [card]="card"></app-card-print-list>
+  </section>
+
 </section>
 
-<section class="py-4">
-  <app-card-print-list [card]="card"></app-card-print-list>
-</section>
