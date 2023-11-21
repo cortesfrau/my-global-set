@@ -68,13 +68,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.showDigitalPrints = !this.showDigitalPrints;
   }
 
-  // Fetch card data by name from the Scryfall API.
-  private fetchCardByName(cardName: string): Observable<Card> {
-    return this.scryfallService.getCardOracleIdByName(cardName).pipe(
-      switchMap(oracle_id => this.scryfallService.getCardByOracleId(oracle_id))
-    );
-  }
-
   // Method to reset the form and clear the state.
   clearForm(): void {
     this.cardForm.reset(); // Resets the form values.
