@@ -3,15 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CardSearchFormComponent } from './components/card-search-form/card-search-form.component';
+import { CardSearchFormComponent } from './components/card/card-search-form/card-search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CardPrintListComponent } from './components/card-print-list/card-print-list.component';
-import { CardPrintComponent } from './components/card-print/card-print.component';
+import { CardPrintListComponent } from './components/card/card-print-list/card-print-list.component';
+import { CardPrintComponent } from './components/card/card-print/card-print.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotificationBlockComponent } from './components/notification-block/notification-block.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { NotificationBlockComponent } from './components/notification-block/noti
     NavbarComponent,
     FooterComponent,
     NotificationBlockComponent,
+    LoginComponent,
+    ProfileComponent,
+    RequestResetComponent,
+    ResponseResetComponent
   ],
   imports: [
     BrowserModule,

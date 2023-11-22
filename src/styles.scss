@@ -1,8 +1,11 @@
 // Custom SCSS Variables
-@import "./shared/styles/variables";
+// @import "./shared/styles/variables";
 
 // Custom utilities
-@import "./shared/styles/utilities";
+// @import "./shared/styles/utilities";
+
+// Shared Styles
+@import "./shared/styles/shared.scss";
 
 // Bootstrap Styles
 @import "bootstrap/scss/bootstrap";
