@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
-import { Observable, catchError, of, switchMap, throwError, timer } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-card-search-form',
