@@ -1,9 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { HttpErrorHandlerService } from './http-error-handler.service';
 import { TokenService } from './token.service';
 import { AuthStateService } from './auth-state.service';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,14 @@ export class AuthService {
     private http: HttpClient,
     private errorHandler: HttpErrorHandlerService,
     private Token: TokenService,
-    private AuthState: AuthStateService
+    private AuthState: AuthStateService,
+    private Router: Router
   ) {
-    // Inicializa la URL de la API.
+    // Auth API base URL
     this.urlAuthApi = 'http://myglobalset-back.test/api/auth';
   }
 
-  // Log In Method
+  // Log In
   login(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/login`;
 
@@ -31,7 +34,7 @@ export class AuthService {
     );
   }
 
-  // Sign Up Method
+  // Sign Up
   signup(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/signup`;
 
@@ -40,9 +43,20 @@ export class AuthService {
     );
   }
 
-  // Log Out Method
+  // Log Out
   logout() {
     this.AuthState.changeAuthStatus(false);
     this.Token.remove();
+    this.Router.navigateByUrl('/');
   }
+
+  // Password Reset Link
+  sendPasswordResetLink(formData: JSON): Observable<any> {
+    const apiUrl = `${this.urlAuthApi}/send-password-reset-link`;
+
+    return this.http.post(apiUrl, formData).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
 }
