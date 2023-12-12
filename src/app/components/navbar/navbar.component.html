@@ -11,11 +11,17 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="login" data-bs-dismiss="offcanvas"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a>
+          <li class="nav-item" *ngIf="!loggedIn">
+            <a class="nav-link" routerLink="login" data-bs-dismiss="offcanvas"><i class="bi bi-box-arrow-in-right me-2"></i>Log In</a>
+          </li>
+          <li class="nav-item" *ngIf="!loggedIn">
+            <a class="nav-link" routerLink="signup" data-bs-dismiss="offcanvas"><i class="bi bi bi-person-fill-add me-2"></i>Sign Up</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="profile" data-bs-dismiss="offcanvas"><i class="bi bi-person-circle me-2"></i>Profile</a>
+          </li>
+          <li class="nav-item" *ngIf="loggedIn">
+            <a class="nav-link" routerLink="" (click)="logout()" data-bs-dismiss="offcanvas"><i class="bi bi bi-box-arrow-right me-2"></i>Log Out</a>
           </li>
         </ul>
       </div>
