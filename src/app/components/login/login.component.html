@@ -34,10 +34,14 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary">Log In</button>
+                <button type="submit" class="btn btn-primary"
+                  [disabled]="!loginForm.valid">Log In</button>
 
             </form>
 
+          </div>
+          <div class="card-footer">
+            <a routerLink="/request-password-reset" class="card-link">Reset Password</a>
           </div>
         </div>
       </div>
