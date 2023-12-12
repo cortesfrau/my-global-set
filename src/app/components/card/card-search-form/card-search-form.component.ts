@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
 import { Observable, of, switchMap } from 'rxjs';
@@ -34,9 +34,10 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     private scryfallService: ScryfallService,
     private formBuilder: FormBuilder
   ) {
-    // Initialize the form group with the form controls.
-    this.cardForm = this.formBuilder.group({
-      cardName: ['', Validators.required] // cardName field must be non-empty.
+
+    // Initialize the form group with form controls.
+    this.cardForm = new FormGroup({
+      cardName: new FormControl('', [Validators.required]),
     });
   }
 
@@ -103,13 +104,16 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
   // Event handler for form submission.
   onSubmit(): void {
+
     // Set the 'submitted' flag to true indicating the form has been attempted to be submitted.
     this.submitted = true;
+
     // Clear any existing error messages when a new form submission is attempted.
     this.errorMessage = null;
 
     // Check if the form is valid based on the defined Validators.
     if (this.cardForm.valid) {
+
       // Indicate that the application is in a loading state, which can be used to display a loader in the UI.
       this.isLoading = true;
 
@@ -131,10 +135,10 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
             this.isLoading = false;
           },
           // Handle any errors that occur during the API call sequence.
-          error: (error: { message: string | null; }) => {
+          error: (error) => {
             // On error, set loading to false and show the error message.
             this.isLoading = false;
-            this.errorMessage = error.message;
+            this.errorMessage = error.error.details;
             console.error('Error fetching card data:', error);
           },
           // Once the observable completes, ensure that the loading indicator is turned off.
