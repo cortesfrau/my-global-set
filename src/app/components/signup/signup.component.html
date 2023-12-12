@@ -1,1 +1,82 @@
-<p>signup works!</p>
+<section class="wrapper">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card">
+          <h5 class="card-header">Sign Up</h5>
+          <div class="card-body">
+
+            <div *ngIf="errorMessage" class="alert alert-danger mb-4" role="alert">
+              {{ errorMessage }}
+            </div>
+
+            <div *ngIf="submitted && f['password'].dirty && f['password_confirmation'].dirty && signupForm.errors?.['passwordsDontMatch']"
+              class="alert alert-danger mb-4" role="alert">
+              Passwords don't match.
+            </div>
+
+            <form  [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+                <!-- First Name Field -->
+                <div class="mb-3">
+                  <label for="first_name" class="form-label">First Name</label>
+                  <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" id="first_name"
+                    [ngClass]="{'is-invalid': f['first_name'].invalid && (submitted || f['first_name'].dirty) }" required>
+                  <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['first_name'].errors['required'] && (submitted || f['first_name'].dirty)">First Name is required.</div>
+                  </div>
+                </div>
+
+                <!-- Last Name Field -->
+                <div class="mb-3">
+                  <label for="last_name" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" id="last_name"
+                    [ngClass]="{'is-invalid': f['last_name'].invalid && (submitted || f['last_name'].dirty) }" required>
+                  <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
+                    <div *ngIf="f['last_name'].errors['required'] && (submitted || f['last_name'].dirty)">Last Name is required.</div>
+                  </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email"
+                    [ngClass]="{'is-invalid': f['email'].invalid && (submitted || f['email'].dirty) }" required>
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required'] && (submitted || f['email'].dirty)">Email is required.</div>
+                    <div *ngIf="f['email'].errors['email'] && (submitted || f['email'].dirty)">Please enter a valid email address.</div>
+                  </div>
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
+                    [ngClass]="{'is-invalid': (f['password'].invalid || signupForm.errors?.['passwordsDontMatch']) && (submitted || f['password'].dirty)}" required>
+                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">Password is required.</div>
+                    <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</div>
+                  </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="mb-3">
+                  <label for="password_confirmation" class="form-label">Confirm Password</label>
+                  <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
+                    [ngClass]="{'is-invalid': (f['password_confirmation'].invalid || signupForm.errors?.['passwordsDontMatch']) && (submitted || f['password_confirmation'].dirty)}" required>
+                  <div *ngIf="submitted && f['password_confirmation'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password_confirmation'].errors['required']">Confirm Password is required.</div>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
