@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, map, forkJoin, catchError, throwError } from 'rxjs';
-
 import { Card } from '../models/card.interface';
 import { Print } from '../models/print.interface';
-
 import { LanguagesData, SetsLanguages } from 'src/shared/languages-dictionary';
 import { Language } from '../models/language.interface';
+import { HttpErrorHandlerService } from './http-error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,31 +15,12 @@ export class ScryfallService {
   // Base URL for the Scryfall API.
   private urlScryfallApi: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private errorHandler: HttpErrorHandlerService
+  ) {
     // Initialize the API URL.
     this.urlScryfallApi = 'https://api.scryfall.com/';
-  }
-
-  // Handle HTTP errors from requests.
-  private handleError(error: HttpErrorResponse) {
-    // Default error message to be shown to the user.
-    let message = 'An unexpected error occurred. Please try again.';
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-      // Custom error messages based on response status.
-      if (error.status === 404) {
-        message = 'Card not found. Please check the name and try again.';
-      } else if (error.status === 400) {
-        message = 'Bad request. Please check the input and try again.';
-      }
-    }
-    // Propagate the error as an observable for the subscriber to handle.
-    return throwError(() => new Error(message));
   }
 
   // Default language for the card data (English in this case).
@@ -79,7 +59,7 @@ export class ScryfallService {
       // Extract the Oracle ID from the response.
       map((data: any) => data.oracle_id),
       // Handle any errors that occur during the request.
-      catchError(this.handleError)
+      catchError(this.errorHandler.handleError)
     );
   }
 
