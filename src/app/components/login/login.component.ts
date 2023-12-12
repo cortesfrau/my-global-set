@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthStateService } from 'src/app/services/auth-state.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -8,18 +12,26 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class LoginComponent {
 
+  // Login form
   loginForm: FormGroup;
 
-  // Flag to check if the login form was submitted.
+  // Flag to check if the search form was submitted.
   submitted = false;
 
+  // User friendly error message
+  errorMessage: string | null = null;
+
   constructor(
-    private formBuilder: FormBuilder
+    private Auth: AuthService,
+    private Token: TokenService,
+    private Router: Router,
+    private AuthState: AuthStateService,
   ) {
-    // Initialize the form group with the form controls.
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+
+    // Initialize the form group with form controls.
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
@@ -28,9 +40,28 @@ export class LoginComponent {
     return this.loginForm.controls;
   }
 
+  private handleResponse(data: { access_token: string; }) {
+    this.Token.handle(data.access_token);
+    this.AuthState.changeAuthStatus(true);
+    this.Router.navigateByUrl('/profile');
+  }
+
   onSubmit(): void {
     this.submitted = true;
-    console.log('login form submitted');
+    this.errorMessage = null;
+
+    if (this.loginForm.valid) {
+      this.Auth.login(this.loginForm.value).subscribe({
+        next: (data) => {
+          this.handleResponse(data);
+          console.log('Log In successful');
+        },
+        error: (error) => {
+          this.errorMessage = error.error.error;
+          console.error('Error logging in the user:', error);
+        },
+      });
+    }
   }
 
 }
