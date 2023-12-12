@@ -65,10 +65,18 @@ $input-btn-padding-x: 1.5rem;
 // Forms
 $input-bg: $white;
 $form-floating-label-opacity: .5;
+$input-placeholder-color: rgba($body-color, .4);
+
+// Navbar
+$navbar-nav-link-padding-x: 1rem;
 
 // Cards
 $card-bg: $white;
 $card-border-width: 0;
+$card-cap-padding-y: 1.5rem;
+$card-cap-padding-x: 1.5rem;
+$card-spacer-y: 1.5rem;
+$card-spacer-x: 1.5rem;
 
 // Transitions
 $transition-base: all .2s ease-in-out;

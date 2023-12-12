@@ -1,9 +1,3 @@
-// Custom SCSS Variables
-// @import "./shared/styles/variables";
-
-// Custom utilities
-// @import "./shared/styles/utilities";
-
 // Shared Styles
 @import "./shared/styles/shared.scss";
 
@@ -32,8 +26,8 @@ img {
 //--- Forms ---//
 //-------------//
 .form-floating > label {
-  color: $gray-500;
+  color: $input-placeholder-color;
 }
-
-
-
+input:focus::placeholder {
+  color: transparent;
+}
