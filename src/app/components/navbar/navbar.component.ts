@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthStateService } from 'src/app/services/auth-state.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,7 +14,6 @@ export class NavbarComponent {
   constructor(
     private AuthState: AuthStateService,
     private Auth: AuthService,
-    private Router: Router
   ){ }
 
   ngOnInit() {
@@ -23,9 +21,9 @@ export class NavbarComponent {
     this.AuthState.authStatus.subscribe(value => this.loggedIn = value);
   }
 
-  logout(): void {
+  logout(event: MouseEvent): void {
+    event.preventDefault();
     this.Auth.logout();
-    this.Router.navigateByUrl('');
   }
 
 }
