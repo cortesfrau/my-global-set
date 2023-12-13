@@ -4,6 +4,7 @@ import { AuthStateService } from 'src/app/services/auth-state.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { SnotifyModule, SnotifyService } from 'ng-alt-snotify';
 
 @Component({
   selector: 'app-request-reset',
@@ -26,6 +27,7 @@ export class RequestResetComponent {
      private Token: TokenService,
      private Router: Router,
      private AuthState: AuthStateService,
+     private Snotify: SnotifyService
    ) {
 
      // Initialize the form group with form controls.
@@ -39,9 +41,9 @@ export class RequestResetComponent {
      return this.passwordResetForm.controls;
    }
 
-   private handleResponse(res: any) {
+   private handleResponse(response: JSON) {
     this.f['email'].setValue(null);
-    console.log('email now is NULL');
+    console.log(response);
   }
 
    onSubmit(): void {
@@ -55,8 +57,9 @@ export class RequestResetComponent {
            console.log('Password reset link sent!');
          },
          error: (error) => {
-           this.errorMessage = error.error.error;
-           console.error('Error sending password reset link:', error);
+          this.Snotify.error(error.error.error);
+          this.errorMessage = error.error.error;
+          console.error('Error sending password reset link:', error);
          },
        });
      }

@@ -59,4 +59,13 @@ export class AuthService {
     );
   }
 
+  // Change Password
+  changePassword(formData: JSON): Observable<any> {
+    const apiUrl = `${this.urlAuthApi}/change-password`;
+
+    return this.http.post(apiUrl, formData).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
 }

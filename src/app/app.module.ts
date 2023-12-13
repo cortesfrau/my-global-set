@@ -18,6 +18,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-alt-snotify';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,11 @@ import { SignupComponent } from './components/signup/signup.component';
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SnotifyModule
   ],
-  providers: [],
+  providers: [
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,9 +11,8 @@ import { passwordMatchingValidator } from 'src/shared/validators/custom-validato
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-[x: string]: any;
 
-  // Signup form
+  // Signup Form
   signupForm: FormGroup;
 
   // Flag to check if the search form was submitted.
