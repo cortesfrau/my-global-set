@@ -90,6 +90,8 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     // Optionally, additional operations on the card data can be done here.
     this.saveLastSearchedCard();
     this.updateFormValue();
+
+    console.log(card);
   }
 
   // Persists the last searched card into local storage.
@@ -119,21 +121,28 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
       // Start by fetching the card's Oracle ID using the card name provided in the form.
       this.scryfallService.getCardOracleIdByName(this.f['cardName'].value)
+
         .pipe(
+
           // Use the Oracle ID to fetch the full card data.
           switchMap((oracleId: string) => this.scryfallService.getCardByOracleId(oracleId)),
+
           // Filter the card's prints based on the 'showDigitalPrints' flag.
           switchMap((card: Card) => this.filterDigitalPrintsIfNeeded(card)),
+
           // Enrich the card prints with additional information from other API endpoints.
           switchMap((card: Card) => this.scryfallService.addExtraInfoToPrints(card))
         )
         .subscribe({
+
           // Handle the successful response by updating the UI with the card data.
           next: (card: Card) => {
             this.handleCardData(card);
+
             // Loading is complete, so set the loading state to false.
             this.isLoading = false;
           },
+
           // Handle any errors that occur during the API call sequence.
           error: (error) => {
             // On error, set loading to false and show the error message.
@@ -141,12 +150,15 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
             this.errorMessage = error.error.details;
             console.error('Error fetching card data:', error);
           },
+
           // Once the observable completes, ensure that the loading indicator is turned off.
           complete: () => {
             this.isLoading = false;
           }
         });
+
     } else {
+
       // If the form is not valid, set an appropriate error message to display in the UI.
       this.errorMessage = 'Please ensure the form is filled out correctly.';
     }
