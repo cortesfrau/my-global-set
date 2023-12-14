@@ -10,9 +10,12 @@
               {{ errorMessage }}
             </div>
 
-            <div *ngIf="submitted && f['password'].dirty && f['password_confirmation'].dirty && resetPasswordForm.errors?.['passwordsDontMatch']"
-              class="alert alert-danger mb-4" role="alert">
-              Passwords don't match.
+            <div *ngIf="successMessage" class="alert alert-success mb-4" role="alert">
+              {{ successMessage }}
+            </div>
+
+            <div *ngIf="resetPasswordForm.errors?.['passwordsDontMatch'] && f['password_confirmation'].dirty" class="invalid-feedback">
+              <p>Passwords don't match.</p>
             </div>
 
             <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmit()">
@@ -21,10 +24,10 @@
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
-                    [ngClass]="{'is-invalid': (f['password'].invalid || resetPasswordForm.errors?.['passwordsDontMatch']) && (submitted || f['password'].dirty)}" required>
-                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password'].errors['required']">Password is required.</div>
-                    <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</div>
+                    [ngClass]="{'is-invalid': f['password'].invalid && f['password'].dirty }" required>
+                  <div *ngIf="f['password'].errors && f['password'].dirty" class="invalid-feedback">
+                    <p *ngIf="f['password'].errors['required']">Password is required.</p>
+                    <p *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</p>
                   </div>
                 </div>
 
@@ -32,9 +35,16 @@
                 <div class="mb-3">
                   <label for="password_confirmation" class="form-label">Confirm Password</label>
                   <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
-                    [ngClass]="{'is-invalid': (f['password_confirmation'].invalid || resetPasswordForm.errors?.['passwordsDontMatch']) && (submitted || f['password_confirmation'].dirty)}" required>
-                  <div *ngIf="submitted && f['password_confirmation'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password_confirmation'].errors['required']">Confirm Password is required.</div>
+                    [ngClass]="{
+                      'is-invalid':
+                        f['password_confirmation'].invalid && f['password_confirmation'].dirty ||
+                        f['password_confirmation'].dirty && resetPasswordForm.errors?.['passwordsDontMatch']
+                    }" required>
+                  <div *ngIf="f['password_confirmation'].errors && f['password_confirmation'].dirty" class="invalid-feedback">
+                    <p class="m-0" *ngIf="f['password_confirmation'].errors['required']">Confirm Password is required.</p>
+                  </div>
+                  <div *ngIf="resetPasswordForm.errors?.['passwordsDontMatch']" class="invalid-feedback">
+                    <p>Passwords don't match.</p>
                   </div>
                 </div>
 

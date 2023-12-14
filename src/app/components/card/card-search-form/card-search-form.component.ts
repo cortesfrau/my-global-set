@@ -1,8 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
 import { Observable, of, switchMap } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { CollectionService } from 'src/app/services/collection.service';
+import { User } from 'src/app/models/user.interface';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-card-search-form',
@@ -26,13 +32,21 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
   // Flag to decide whether to show digital prints in the results.
   showDigitalPrints: boolean = false;
 
-  // User friendly error message
+  // User friendly messages
   errorMessage: string | null = null;
+  successMessage: string | null = null;
+
+  // Current user
+  currentUserId: Number | null = null;
 
   // Dependency injection of the ScryfallService and FormBuilder.
   constructor(
     private scryfallService: ScryfallService,
-    private formBuilder: FormBuilder
+    private User: UserService,
+    private Collection: CollectionService,
+    private Router: Router,
+    private Token: TokenService,
+    private Auth: AuthService,
   ) {
 
     // Initialize the form group with form controls.
@@ -43,6 +57,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
   // Actions to perform when the component is destroyed.
   ngOnDestroy(): void {
+
     // Persist the last searched card data into local storage.
     if (this.card) {
       localStorage.setItem('lastSearchedCard', JSON.stringify(this.card));
@@ -51,11 +66,28 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
 
   // Lifecycle hook for initialization tasks.
   ngOnInit(): void {
+
     // Attempt to retrieve and populate the form with the last searched card from local storage.
     const lastSearchedCard = localStorage.getItem('lastSearchedCard');
     if (lastSearchedCard) {
       this.card = JSON.parse(lastSearchedCard);
       this.cardForm.patchValue({ cardName: this.card.name });
+    }
+
+    // Get current user
+    if (this.Token.loggedIn()) {
+
+      this.User.getAuthenticated().subscribe({
+        next: (data: User) => {
+          this.currentUserId = data.id;
+          console.log('Current user:', this.currentUserId);
+        },
+        error: (error: { message: string | null; }) => {
+          console.error('Error retrieving user info:', error);
+        },
+        complete: () => {
+        }
+      });
     }
   }
 
@@ -77,6 +109,10 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.isLoading = false; // Can reset the loading state if necessary.
     this.errorMessage = null; // Reset search errors.
     localStorage.removeItem('lastSearchedCard'); // Clears the card stored in localStorage.
+  }
+
+  isEmptyObject(obj: any): boolean {
+    return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 
   // Filters out digital prints from the card's print array if needed.
@@ -164,6 +200,32 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  public createCollection() {
+
+    this.User.getAuthenticated().subscribe({
+      next: (user) => {
+        console.log('User:', user);
+      }
+    })
+
+    let data: any = {
+      user_id: this.currentUserId,
+      card_id: this.card.oracle_id,
+      card_name: this.card.name,
+    }
+
+    this.Collection.create(data).subscribe({
+      next: (data: { message: string | null; }) => {
+        this.successMessage = data.message;
+        setTimeout(() => {
+          this.Router.navigateByUrl('/collections');
+        }, 2000)
+      },
+      error: (error) => {
+        this.errorMessage = error.error.error;
+        console.error('Error creating account.:', error);
+      },
+    });
+  }
 
 }
-

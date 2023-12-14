@@ -25,7 +25,7 @@ export class LoginComponent {
     private Auth: AuthService,
     private Token: TokenService,
     private Router: Router,
-    private AuthState: AuthStateService,
+    private AuthState: AuthStateService
   ) {
 
     // Initialize the form group with form controls.
@@ -52,16 +52,20 @@ export class LoginComponent {
 
     if (this.loginForm.valid) {
       this.Auth.login(this.loginForm.value).subscribe({
+
         next: (data) => {
           this.handleResponse(data);
-          console.log('Log In successful');
+          console.log('User is logged in');
         },
+
         error: (error) => {
           this.errorMessage = error.error.error;
-          console.error('Error logging in the user:', error);
+
+          console.error('Error: the user couldn\'t log in.', error);
         },
+
       });
     }
-  }
 
+  }
 }

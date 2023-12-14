@@ -17,7 +17,7 @@ export class ScryfallService {
 
   constructor(
     private http: HttpClient,
-    private errorHandler: HttpErrorHandlerService
+    private errorHandler: HttpErrorHandlerService,
   ) {
     // Initialize the API URL.
     this.urlScryfallApi = 'https://api.scryfall.com/';

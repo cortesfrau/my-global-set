@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { passwordMatchingValidator } from 'src/shared/validators/custom-validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-response-reset',
@@ -10,26 +11,25 @@ import { passwordMatchingValidator } from 'src/shared/validators/custom-validato
   styleUrls: ['./response-reset.component.scss']
 })
 export class ResponseResetComponent {
+  [x: string]: any;
 
   // Reset Password Form
   resetPasswordForm!: FormGroup;
 
-  // Reset Token
-  // resetToken!: string;
-
   // Flag to check if the search form was submitted.
   submitted = false;
 
-  // User friendly error message
+  // User friendly messages
   errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
     private Route: ActivatedRoute,
-    private Auth: AuthService
+    private Auth: AuthService,
+    private Router: Router,
   ) {
 
     this.Route.queryParams.subscribe(params => {
-      // this.resetToken = params['token'];
       this.resetPasswordForm = new FormGroup({
         password: new FormControl('', [Validators.required, Validators.minLength(8)]),
         password_confirmation: new FormControl('', [Validators.required]),
@@ -46,29 +46,27 @@ export class ResponseResetComponent {
     return this.resetPasswordForm.controls;
   }
 
-  private handleResponse(res: any) {
-    console.log(res);
+  private handleResponse(response: any) {
+    this.successMessage = response.data;
+    setTimeout(() => {
+      this.Router.navigateByUrl('/login');
+    }, 2000);
   }
 
   onSubmit(): void {
-    this.submitted = true;
 
-    // Clear any existing error messages when a new form submission is attempted.
+    this.submitted = true;
     this.errorMessage = null;
+    this.successMessage = null;
 
     if (this.resetPasswordForm.valid) {
-
-      console.log(this.resetPasswordForm.value);
 
       this.Auth.changePassword(this.resetPasswordForm.value).subscribe({
         next: (data: any) => {
           this.handleResponse(data);
-          console.log('Password changed.');
-
-          console.log(this.resetPasswordForm.value);
         },
-        error: (error: { message: string | null; }) => {
-          this.errorMessage = error.message;
+        error: (error: any) => {
+          this.errorMessage = error.error.error;
           console.error('Error changing the password:', error);
         },
       });

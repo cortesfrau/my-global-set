@@ -10,68 +10,73 @@
               {{ errorMessage }}
             </div>
 
-            <div *ngIf="submitted && f['password'].dirty && f['password_confirmation'].dirty && signupForm.errors?.['passwordsDontMatch']"
-              class="alert alert-danger mb-4" role="alert">
-              Passwords don't match.
+            <div *ngIf="successMessage" class="alert alert-success mb-4" role="alert">
+              {{ successMessage }}
             </div>
 
             <form  [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-                <!-- First Name Field -->
-                <div class="mb-3">
-                  <label for="first_name" class="form-label">First Name</label>
-                  <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" id="first_name"
-                    [ngClass]="{'is-invalid': f['first_name'].invalid && (submitted || f['first_name'].dirty) }" required>
-                  <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['first_name'].errors['required'] && (submitted || f['first_name'].dirty)">First Name is required.</div>
-                  </div>
+              <!-- First Name Field -->
+              <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" id="first_name"
+                  [ngClass]="{'is-invalid': f['first_name'].invalid && (submitted || f['first_name'].dirty) }" required>
+                <div *ngIf="f['first_name'].errors" class="invalid-feedback">
+                  <div *ngIf="f['first_name'].errors['required'] && f['first_name'].dirty">This field is required.</div>
                 </div>
+              </div>
 
-                <!-- Last Name Field -->
-                <div class="mb-3">
-                  <label for="last_name" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" id="last_name"
-                    [ngClass]="{'is-invalid': f['last_name'].invalid && (submitted || f['last_name'].dirty) }" required>
-                  <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
-                    <div *ngIf="f['last_name'].errors['required'] && (submitted || f['last_name'].dirty)">Last Name is required.</div>
-                  </div>
+              <!-- Last Name Field -->
+              <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" id="last_name"
+                  [ngClass]="{'is-invalid': f['last_name'].invalid && (submitted || f['last_name'].dirty) }" required>
+                <div *ngIf="f['last_name'].errors" class="invalid-feedback">
+                  <div *ngIf="f['last_name'].errors['required'] && f['last_name'].dirty">This field is required.</div>
                 </div>
+              </div>
 
-                <!-- Email Field -->
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email"
-                    [ngClass]="{'is-invalid': f['email'].invalid && (submitted || f['email'].dirty) }" required>
-                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                    <div *ngIf="f['email'].errors['required'] && (submitted || f['email'].dirty)">Email is required.</div>
-                    <div *ngIf="f['email'].errors['email'] && (submitted || f['email'].dirty)">Please enter a valid email address.</div>
-                  </div>
+              <!-- Email Field -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email"
+                  [ngClass]="{'is-invalid': f['email'].invalid && f['email'].dirty }" required>
+                <div *ngIf="f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors['required'] && f['email'].dirty">This field is required.</div>
+                  <div *ngIf="f['email'].errors['email'] && f['email'].dirty">Please enter a valid email address.</div>
                 </div>
+              </div>
 
-                <!-- Password Field -->
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
-                    [ngClass]="{'is-invalid': (f['password'].invalid || signupForm.errors?.['passwordsDontMatch']) && (submitted || f['password'].dirty)}" required>
-                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password'].errors['required']">Password is required.</div>
-                    <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</div>
-                  </div>
+              <!-- Password Field -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
+                  [ngClass]="{'is-invalid': f['password'].invalid && f['password'].dirty }" required>
+                <div *ngIf="f['password'].errors && f['password'].dirty" class="invalid-feedback">
+                  <p *ngIf="f['password'].errors['required']">This field is required.</p>
+                  <p *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</p>
                 </div>
+              </div>
 
-                <!-- Confirm Password Field -->
-                <div class="mb-3">
-                  <label for="password_confirmation" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
-                    [ngClass]="{'is-invalid': (f['password_confirmation'].invalid || signupForm.errors?.['passwordsDontMatch']) && (submitted || f['password_confirmation'].dirty)}" required>
-                  <div *ngIf="submitted && f['password_confirmation'].errors" class="invalid-feedback">
-                    <div *ngIf="f['password_confirmation'].errors['required']">Confirm Password is required.</div>
-                  </div>
+              <!-- Confirm Password Field -->
+              <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
+                  [ngClass]="{
+                    'is-invalid':
+                      f['password_confirmation'].invalid && f['password_confirmation'].dirty ||
+                      f['password_confirmation'].dirty && signupForm.errors?.['passwordsDontMatch']
+                  }" required>
+                <div *ngIf="f['password_confirmation'].errors && f['password_confirmation'].dirty" class="invalid-feedback">
+                  <p class="m-0" *ngIf="f['password_confirmation'].errors['required']">This field is required.</p>
                 </div>
+                <div *ngIf="signupForm.errors?.['passwordsDontMatch']" class="invalid-feedback">
+                  <p>Passwords don't match.</p>
+                </div>
+              </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary"
-                  [disabled]="!signupForm.valid">Sign Up</button>
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
 
             </form>
 

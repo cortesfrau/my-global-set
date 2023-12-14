@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthStateService } from 'src/app/services/auth-state.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 import { passwordMatchingValidator } from 'src/shared/validators/custom-validators';
@@ -18,13 +19,15 @@ export class SignupComponent {
   // Flag to check if the search form was submitted.
   submitted = false;
 
-  // User friendly error message
+  // User friendly messages
   errorMessage: string | null = null;
+  successMessage: string | null = null;
 
   constructor(
     private Auth: AuthService,
     private Token: TokenService,
-    private Router: Router
+    private Router: Router,
+    private AuthState: AuthStateService
   ) {
 
   this.signupForm = new FormGroup({
@@ -42,19 +45,21 @@ export class SignupComponent {
   }
 
   private handleResponse(data: { access_token: string; }) {
+    this.successMessage = 'Your account has been created.';
     this.Token.handle(data.access_token);
-    this.Router.navigateByUrl('/profile');
+    this.AuthState.changeAuthStatus(true);
+    setTimeout(() => {
+      this.Router.navigateByUrl('/profile');
+    }, 2000);
   }
 
   onSubmit(): void {
-    this.submitted = true;
 
-    // Clear any existing error messages when a new form submission is attempted.
+    this.submitted = true;
     this.errorMessage = null;
+    this.successMessage = null;
 
     if (this.signupForm.valid) {
-
-      console.log(this.signupForm);
 
       this.Auth.signup(this.signupForm.value).subscribe({
         next: (data) => {
@@ -63,9 +68,10 @@ export class SignupComponent {
         },
         error: (error: { message: string | null; }) => {
           this.errorMessage = error.message;
-          console.error('Error signing up the user:', error);
+          console.error('Error creating account.:', error);
         },
       });
+
     }
   }
 

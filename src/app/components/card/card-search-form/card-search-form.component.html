@@ -12,6 +12,10 @@
           {{ errorMessage }}
         </div>
 
+        <div *ngIf="successMessage" class="alert alert-success mb-4" role="alert">
+          {{ successMessage }}
+        </div>
+
         <form class="row justify-content-center g-2 py-4" [formGroup]="cardForm" (ngSubmit)="onSubmit()">
           <div class="col-12">
 
@@ -39,6 +43,9 @@
           <div class="col-auto ms-auto">
             <button class="btn btn-secondary mx-2" type="button" (click)="clearForm()">Clear form</button>
             <button class="btn btn-primary" type="submit">Search card</button>
+
+            <button *ngIf="card && !isEmptyObject(card)" class="btn btn-success mx-2" (click)="createCollection()">Start a collection of this card!</button>
+
           </div>
 
         </form>

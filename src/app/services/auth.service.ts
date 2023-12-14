@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { HttpErrorHandlerService } from './http-error-handler.service';
 import { TokenService } from './token.service';
 import { AuthStateService } from './auth-state.service';
 import { Router } from '@angular/router';
+import { HttpErrorHandlerService } from './http-error-handler.service';
 
 
 @Injectable({

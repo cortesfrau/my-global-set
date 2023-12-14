@@ -18,6 +18,9 @@
             <a class="nav-link" routerLink="/signup" data-bs-dismiss="offcanvas"><i class="bi bi bi-person-fill-add me-2"></i>Sign Up</a>
           </li>
           <li class="nav-item" *ngIf="loggedIn">
+            <a class="nav-link" routerLink="/collections" data-bs-dismiss="offcanvas"><i class="bi bi-star-fill me-2"></i>Collections</a>
+          </li>
+          <li class="nav-item" *ngIf="loggedIn">
             <a class="nav-link" routerLink="/profile" data-bs-dismiss="offcanvas"><i class="bi bi-person-circle me-2"></i>Profile</a>
           </li>
           <li class="nav-item" *ngIf="loggedIn">
