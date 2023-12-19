@@ -47,6 +47,7 @@ export class ScryfallService {
     return {
       oracle_id: cardOracleId,
       name: data.data[0].name,
+      art_uri: data.data[0].image_uris.art_crop,
       prints: prints,
     };
   }

@@ -1,0 +1,79 @@
+// Custom SCSS Variables
+@import "./../../../../shared/styles/variables";
+
+//--------------------------------//
+//--- Collection Detail Styles ---//
+//--------------------------------//
+
+
+
+.collected-card-item {
+  display: flex;
+  border-radius: $border-radius;
+  background-color: $white;
+  align-items: center;
+  border-radius: $border-radius;
+  border: 1px solid $gray-300;
+  padding: .5rem;
+  color: $body-color;
+
+  &_left {
+    width: 30%;
+  }
+
+  &_right {
+    width: 70%;
+    padding: 0 0 0 1rem;
+  }
+
+  &_img {
+
+  }
+
+  &_name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+  }
+
+  &_set {
+    font-size: $font-size-sm;
+    margin-bottom: 1rem;
+  }
+
+  &.collected {
+
+    background-color: rgba(green, .25);
+
+  }
+
+  @media only screen and (min-width: 768px) {
+
+    &_left {
+      width: 20%;
+    }
+
+    &_right {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: .5rem;
+    }
+
+    &_set {
+      margin-bottom: 0;
+    }
+
+    &_meta {
+      width: 70%;
+      padding-right: 1rem;
+    }
+
+    &_actions {
+      width: 30%;
+      text-align: right;
+    }
+
+  }
+
+}

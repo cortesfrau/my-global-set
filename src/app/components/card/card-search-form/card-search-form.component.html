@@ -4,7 +4,7 @@
 
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+      <div class="col-12 col-xl-7 col-xxl-6">
 
         <h2 class="text-center mb-4">Search a <span class="fw-bold">Magic: the Gathering</span> card to discover all its <span class="fw-bold">printed versions</span></h2>
 
@@ -44,7 +44,7 @@
             <button class="btn btn-secondary mx-2" type="button" (click)="clearForm()">Clear form</button>
             <button class="btn btn-primary" type="submit">Search card</button>
 
-            <button *ngIf="card && !isEmptyObject(card)" class="btn btn-success mx-2" (click)="createCollection()">Start a collection of this card!</button>
+            <button *ngIf="showCollectionBtn()" class="btn btn-success mx-2" (click)="createCollection()">Start a collection of this card!</button>
 
           </div>
 
@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <section>
+  <section class="wrapper">
     <app-card-print-list [card]="card"></app-card-print-list>
   </section>
 

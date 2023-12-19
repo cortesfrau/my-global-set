@@ -19,6 +19,8 @@ import { ResponseResetComponent } from './components/password/response-reset/res
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CollectionListComponent } from './components/collection/collection-list/collection-list.component';
+import { CollectionItemComponent } from './components/collection/collection-item/collection-item.component';
+import { CollectionDetailComponent } from './components/collection/collection-detail/collection-detail.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { CollectionListComponent } from './components/collection/collection-list
     ResponseResetComponent,
     HomeComponent,
     SignupComponent,
-    CollectionListComponent
+    CollectionListComponent,
+    CollectionItemComponent,
+    CollectionDetailComponent
   ],
   imports: [
     BrowserModule,

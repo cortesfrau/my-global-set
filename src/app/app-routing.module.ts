@@ -8,6 +8,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CollectionListComponent } from './components/collection/collection-list/collection-list.component';
+import { CollectionDetailComponent } from './components/collection/collection-detail/collection-detail.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,12 @@ const routes: Routes = [
   {
     path: 'collections',
     component: CollectionListComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardType: 'afterLogin' }
+  },
+  {
+    path: 'collection/:id',
+    component: CollectionDetailComponent,
     canActivate: [AuthGuard],
     data: { authGuardType: 'afterLogin' }
   },

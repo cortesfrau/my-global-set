@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
@@ -46,7 +46,8 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     private Collection: CollectionService,
     private Router: Router,
     private Token: TokenService,
-    private Auth: AuthService,
+    private cdr: ChangeDetectorRef
+
   ) {
 
     // Initialize the form group with form controls.
@@ -108,7 +109,18 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.submitted = false; // Resets the 'submitted' state.
     this.isLoading = false; // Can reset the loading state if necessary.
     this.errorMessage = null; // Reset search errors.
+    this.showDigitalPrints = false;
+
+    const checkboxElement = document.getElementById('showDigitalPrints') as HTMLInputElement;
+    if (checkboxElement) {
+      checkboxElement.checked = false;
+    }
+
     localStorage.removeItem('lastSearchedCard'); // Clears the card stored in localStorage.
+  }
+
+  showCollectionBtn(): boolean {
+    return this.card && !this.isEmptyObject(this.card) && this.currentUserId != null;
   }
 
   isEmptyObject(obj: any): boolean {
@@ -123,10 +135,8 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
   // Handles the card data received from the API and updates the view.
   private handleCardData(card: Card): void {
     this.card = card;
-    // Optionally, additional operations on the card data can be done here.
     this.saveLastSearchedCard();
     this.updateFormValue();
-
     console.log(card);
   }
 
@@ -223,7 +233,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.errorMessage = error.error.error;
-        console.error('Error creating account.:', error);
+        console.error('Error creating collection:', error);
       },
     });
   }

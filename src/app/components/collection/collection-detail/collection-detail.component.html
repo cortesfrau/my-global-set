@@ -1,0 +1,31 @@
+<section class="wrapper">
+  <div class="container">
+
+    <div *ngIf="card">
+
+      <h1 class="mb-4">{{ card.name }}</h1>
+      <div class="row g-3">
+        <div *ngFor="let print of card.prints" class="col-lg-6 col-xl-4">
+
+          <div class="collected-card-item" [ngClass]="{'collected': isPrintInCollection(print.id)}">
+            <div class="collected-card-item_left">
+              <img class="collected-card-item_img" [src]="print.image_uri">
+            </div>
+            <div class="collected-card-item_right">
+              <div class="collected-card-item_meta">
+                <h2 class="collected-card-item_name">{{ card.name }}</h2>
+                <h3 class="collected-card-item_set">{{ print.set_name }}</h3>
+              </div>
+              <div class="collected-card-item_actions">
+                <button *ngIf="!isPrintInCollection(print.id)" class="btn btn-sm btn-success" (click)="saveOrRemoveCollectedCardPrint(print)">Save</button>
+                <button *ngIf="isPrintInCollection(print.id)" class="btn btn-sm btn-danger" (click)="saveOrRemoveCollectedCardPrint(print)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

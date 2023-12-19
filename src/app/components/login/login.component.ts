@@ -43,7 +43,7 @@ export class LoginComponent {
   private handleResponse(data: { access_token: string; }) {
     this.Token.handle(data.access_token);
     this.AuthState.changeAuthStatus(true);
-    this.Router.navigateByUrl('/profile');
+    this.Router.navigateByUrl('/');
   }
 
   onSubmit(): void {
