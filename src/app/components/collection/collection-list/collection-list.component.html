@@ -1,6 +1,6 @@
+<app-page-header [title]="pageTitle"></app-page-header>
 <section class="wrapper">
   <div class="container">
-    <h1 class="mb-4">My collections</h1>
     <div class="row g-3">
       <div *ngFor="let collection of collections" class="col-md-6 col-lg-4">
         <app-collection-item  [collection]="collection"></app-collection-item>

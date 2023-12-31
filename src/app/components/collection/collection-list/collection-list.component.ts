@@ -13,6 +13,9 @@ export class CollectionListComponent implements OnInit {
 
   collections: Collection[] = [];
 
+  // Page Title
+  pageTitle = 'Collections';
+
   constructor(
     private collectionService: CollectionService,
     private userService: UserService,

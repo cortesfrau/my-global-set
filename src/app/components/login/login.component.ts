@@ -5,6 +5,9 @@ import { AuthStateService } from 'src/app/services/auth-state.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
+/**
+ * Component for handling user login.
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,19 +18,25 @@ export class LoginComponent {
   // Login form
   loginForm: FormGroup;
 
-  // Flag to check if the search form was submitted.
-  submitted = false;
-
-  // User friendly error message
+  // User-friendly error message
   errorMessage: string | null = null;
 
-  constructor(
-    private Auth: AuthService,
-    private Token: TokenService,
-    private Router: Router,
-    private AuthState: AuthStateService
-  ) {
+  // Show Spinner
+  showSpinner = false;
 
+  /**
+   * Constructor for the LoginComponent.
+   * @param authService - Authentication service for handling login.
+   * @param tokenService - Service for handling tokens.
+   * @param router - Angular router for navigation.
+   * @param authStateService - Service for managing authentication state.
+   */
+  constructor(
+    private authService: AuthService,
+    private tokenService: TokenService,
+    private router: Router,
+    private authStateService: AuthStateService
+  ) {
     // Initialize the form group with form controls.
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,37 +44,47 @@ export class LoginComponent {
     });
   }
 
-  // Getter for form controls to facilitate access to form fields.
+  /**
+   * Getter for form controls to facilitate access to form fields.
+   * @returns Object with form controls.
+   */
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
   }
 
-  private handleResponse(data: { access_token: string; }) {
-    this.Token.handle(data.access_token);
-    this.AuthState.changeAuthStatus(true);
-    this.Router.navigateByUrl('/');
+  /**
+   * Handles the response after a successful login.
+   * @param data - Data containing the access token.
+   */
+  private handleResponse(data: { access_token: string; }): void {
+    this.tokenService.handle(data.access_token);
+    this.authStateService.changeAuthStatus(true);
+    this.router.navigateByUrl('/');
   }
 
+  /**
+   * Handles form submission for user login.
+   */
   onSubmit(): void {
-    this.submitted = true;
     this.errorMessage = null;
+    this.showSpinner = true;
 
     if (this.loginForm.valid) {
-      this.Auth.login(this.loginForm.value).subscribe({
-
+      this.authService.login(this.loginForm.value).subscribe({
         next: (data) => {
+
           this.handleResponse(data);
           console.log('User is logged in');
         },
-
         error: (error) => {
+          this.showSpinner = false;
           this.errorMessage = error.error.error;
-
           console.error('Error: the user couldn\'t log in.', error);
         },
-
+        complete: () => {
+          this.showSpinner = false;
+        }
       });
     }
-
   }
 }

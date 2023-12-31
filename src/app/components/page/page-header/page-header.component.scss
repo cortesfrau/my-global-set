@@ -1,0 +1,17 @@
+// Custom SCSS Variables
+@import "./../../../../shared/styles/variables";
+
+//--------------------------//
+//--- Page Header Styles ---//
+//--------------------------//
+.page-header {
+  background-color: $primary;
+  color: $white;
+  padding: 1.25rem 0;
+
+  .page-title {
+    color: $white;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+}

@@ -21,6 +21,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CollectionListComponent } from './components/collection/collection-list/collection-list.component';
 import { CollectionItemComponent } from './components/collection/collection-item/collection-item.component';
 import { CollectionDetailComponent } from './components/collection/collection-detail/collection-detail.component';
+import { FormSpinnerComponent } from './components/form-spinner/form-spinner.component';
+import { PageHeaderComponent } from './components/page/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { CollectionDetailComponent } from './components/collection/collection-de
     SignupComponent,
     CollectionListComponent,
     CollectionItemComponent,
-    CollectionDetailComponent
+    CollectionDetailComponent,
+    FormSpinnerComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,

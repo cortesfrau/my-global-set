@@ -20,7 +20,7 @@
               <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" id="first_name"
-                  [ngClass]="{'is-invalid': f['first_name'].invalid && (submitted || f['first_name'].dirty) }" required>
+                  [ngClass]="{'is-invalid': f['first_name'].invalid && f['first_name'].dirty }" required>
                 <div *ngIf="f['first_name'].errors" class="invalid-feedback">
                   <div *ngIf="f['first_name'].errors['required'] && f['first_name'].dirty">This field is required.</div>
                 </div>
@@ -30,7 +30,7 @@
               <div class="mb-3">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" id="last_name"
-                  [ngClass]="{'is-invalid': f['last_name'].invalid && (submitted || f['last_name'].dirty) }" required>
+                  [ngClass]="{'is-invalid': f['last_name'].invalid && f['last_name'].dirty }" required>
                 <div *ngIf="f['last_name'].errors" class="invalid-feedback">
                   <div *ngIf="f['last_name'].errors['required'] && f['last_name'].dirty">This field is required.</div>
                 </div>
@@ -76,7 +76,10 @@
               </div>
 
               <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
+                <app-form-spinner *ngIf="showSpinner"></app-form-spinner>
+              </div>
 
             </form>
 

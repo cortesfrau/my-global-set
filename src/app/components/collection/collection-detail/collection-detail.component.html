@@ -1,12 +1,9 @@
+<app-page-header [title]="pageTitle"></app-page-header>
 <section class="wrapper">
   <div class="container">
-
     <div *ngIf="card">
-
-      <h1 class="mb-4">{{ card.name }}</h1>
       <div class="row g-3">
         <div *ngFor="let print of card.prints" class="col-lg-6 col-xl-4">
-
           <div class="collected-card-item" [ngClass]="{'collected': isPrintInCollection(print.id)}">
             <div class="collected-card-item_left">
               <img class="collected-card-item_img" [src]="print.image_uri">
@@ -24,8 +21,6 @@
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>

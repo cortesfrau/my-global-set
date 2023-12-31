@@ -16,10 +16,10 @@
                 <div class="mb-3">
                   <label for="emailInput" class="form-label">Email</label>
                   <input type="email" class="form-control" placeholder="Email" formControlName="email" id="email"
-                    [ngClass]="{ 'is-invalid': f['email'].invalid && (submitted || f['email'].dirty) }" required>
-                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                    <div *ngIf="f['email'].errors['required'] && (submitted || f['email'].dirty)">Email is required.</div>
-                    <div *ngIf="f['email'].errors['email'] && (submitted || f['email'].dirty)">Please enter a valid email address.</div>
+                    [ngClass]="{ 'is-invalid': f['email'].invalid && f['email'].dirty }" required>
+                  <div *ngIf="f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors['required'] && f['email'].dirty">Email is required.</div>
+                    <div *ngIf="f['email'].errors['email'] && f['email'].dirty">Please enter a valid email address.</div>
                   </div>
                 </div>
 
@@ -27,15 +27,17 @@
                 <div class="mb-3">
                   <label for="passwordInput" class="form-label">Password</label>
                   <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
-                    [ngClass]="{ 'is-invalid': f['password'].invalid && (submitted || f['password'].dirty) }" required>
-                  <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    [ngClass]="{ 'is-invalid': f['password'].invalid && f['password'].dirty }" required>
+                  <div *ngIf="f['password'].errors" class="invalid-feedback">
                     <div *ngIf="f['password'].errors['required']">Password is required.</div>
                   </div>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary"
-                  [disabled]="!loginForm.valid">Log In</button>
+                <div class="d-flex align-items-center">
+                  <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Log In</button>
+                  <app-form-spinner *ngIf="showSpinner"></app-form-spinner>
+                </div>
 
             </form>
 

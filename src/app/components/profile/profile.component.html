@@ -20,7 +20,7 @@
               <div class="mb-3">
                 <label for="first_name" class="form-label">First Name</label>
                 <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" id="first_name"
-                  [ngClass]="{'is-invalid': f['first_name'].invalid && (submitted || f['first_name'].dirty) }" required>
+                  [ngClass]="{'is-invalid': f['first_name'].invalid && f['first_name'].dirty }" required>
                 <div *ngIf="f['first_name'].errors" class="invalid-feedback">
                   <div *ngIf="f['first_name'].errors['required'] && f['first_name'].dirty">This field is required.</div>
                 </div>
@@ -30,7 +30,7 @@
               <div class="mb-3">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" id="last_name"
-                  [ngClass]="{'is-invalid': f['last_name'].invalid && (submitted || f['last_name'].dirty) }" required>
+                  [ngClass]="{'is-invalid': f['last_name'].invalid && f['last_name'].dirty }" required>
                 <div *ngIf="f['last_name'].errors" class="invalid-feedback">
                   <div *ngIf="f['last_name'].errors['required'] && f['last_name'].dirty">This field is required.</div>
                 </div>
@@ -47,8 +47,35 @@
                 </div>
               </div>
 
+              <!-- Password Field -->
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
+                  [ngClass]="{'is-invalid': f['password'].invalid && f['password'].dirty }">
+                <div *ngIf="f['password'].errors && f['password'].dirty" class="invalid-feedback">
+                  <p *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</p>
+                </div>
+              </div>
+
+              <!-- Confirm Password Field -->
+              <div class="mb-3">
+                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
+                  [ngClass]="{
+                    'is-invalid':
+                      f['password_confirmation'].invalid && f['password_confirmation'].dirty ||
+                      f['password_confirmation'].dirty && profileForm.errors?.['passwordsDontMatch']
+                  }">
+                <div *ngIf="profileForm.errors?.['passwordsDontMatch']" class="invalid-feedback">
+                  <p>Passwords don't match.</p>
+                </div>
+              </div>
+
               <!-- Submit Button -->
-              <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Update profile</button>
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Update profile</button>
+                <app-form-spinner *ngIf="showSpinner"></app-form-spinner>
+              </div>
 
             </form>
 

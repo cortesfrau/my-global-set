@@ -20,14 +20,16 @@ export class CollectionDetailComponent implements OnInit {
   card!: Card;
   collectedPrints: Set<string> = new Set();
 
+  pageTitle: string = '';
+
   constructor(
     private scryfallService: ScryfallService,
     private collectionService: CollectionService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
+    this.activatedRoute.paramMap.pipe(
       switchMap(params => {
         const idParam = params.get('id');
         if (idParam !== null) {
@@ -53,6 +55,7 @@ export class CollectionDetailComponent implements OnInit {
           ...card,
           prints: card.prints.filter(print => !print.digital)
         };
+        this.pageTitle = `${card.name} collection`;
         console.log(this.card);
         return this.loadCollectedPrints();
       }),
