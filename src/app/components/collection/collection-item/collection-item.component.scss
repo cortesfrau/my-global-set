@@ -1,52 +1,82 @@
 // Custom SCSS Variables
 @import "./../../../../shared/styles/variables";
-// @import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 //------------------------------//
 //--- Collection Item Styles ---//
 //------------------------------//
 .collection-item {
   display: flex;
-  border-radius: $border-radius;
-  background-color: $light;
+  background-color: transparent;
   align-items: center;
-  border-radius: $border-radius;
-  border: 1px solid $gray-300;
   color: $body-color;
+  display: flex;
+  align-items: center;
+  padding: .5rem;
 
-  &_left {
-    width: 30%;
-
-    // @include media-breakpoint-up(md) {
-    //   width: 15%;
-    // }
-    // @include media-breakpoint-up(lg) {
-    //   width: 12.5%;
-    // }
-    // @include media-breakpoint-up(xl) {
-    //   width: 10%;
-    // }
+  &:hover {
+    background-color: $light;
   }
 
-  &_right {
-    width: 70%;
-    padding: 0 1.25rem;
+  &_link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .collection-item_title {
+      color: $body-color
+    }
   }
 
   &_img {
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 70px;
-    border-bottom-left-radius: $border-radius;
-    border-top-left-radius: $border-radius;
+    width: 90px;
+    border-radius: $border-radius;
   }
 
   &_title {
-    margin: 0;
+    margin-left: 1rem;
     font-size: $font-size-base;
-    font-weight: $font-weight-bold;
+    width: 100%;
   }
 
-}
+  &_options {
+    margin-left: auto;
 
+    &__gear {
+      border: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      background-color: transparent;
+      padding: .5rem;
+
+      &:hover, &:focus, &:target {
+        opacity: .5;
+      }
+    }
+
+    .dropdown-menu {
+      border-radius: 0;
+      border: 0;
+      background-color: $light;
+      box-shadow: $box-shadow;
+      transform: translate(-40px, 0px);
+      min-width: 130px;
+
+      .dropdown-item {
+        font-size: $font-size-sm;
+
+        &:hover {
+          background-color: transparent;
+          opacity: .7;
+        }
+
+        i {
+          margin-right: .5rem;
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,21 @@
-<a routerLink="/collection/{{ collection.id }}" class="collection-item">
-  <div class="collection-item_left">
-    <div class="collection-item_img" style="background-image: url('{{ cardArtUrl }}')">
-    </div>
-  </div>
-  <div class="collection-item_right">
+<div class="collection-item">
+
+  <a class="collection-item_link" routerLink="/collection/{{ collection.id }}">
+    <img class="collection-item_img" src="{{ cardArtUrl }}" alt="{{ collection.card_name }}">
     <h2 class="collection-item_title">{{ collection.card_name }}</h2>
+  </a>
+
+  <div class="collection-item_options dropstart">
+    <button class="collection-item_options__gear" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-gear-fill"></i>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <button class="dropdown-item text-danger" (click)="confirmDelete()">
+          <i class="bi bi-trash-fill"></i>Delete
+        </button>
+      </li>
+    </ul>
   </div>
-</a>
+
+</div>

@@ -6,10 +6,10 @@
       {{ errorMessage }}
     </div>
 
-    <div class="row g-3">
-      <div *ngFor="let collection of collections" class="col-12">
-        <app-collection-item  [collection]="collection"></app-collection-item>
-      </div>
+    <div *ngFor="let collection of collections;last as isLast">
+      <app-collection-item  [collection]="collection"></app-collection-item>
+      <hr *ngIf="!isLast" class="custom-hr">
     </div>
+
   </div>
 </section>

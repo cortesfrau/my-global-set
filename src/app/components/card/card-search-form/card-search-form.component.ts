@@ -227,9 +227,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.Collection.create(data).subscribe({
       next: (data: { message: string | null; }) => {
         this.successMessage = data.message;
-        setTimeout(() => {
-          this.Router.navigateByUrl('/collections');
-        }, 2000)
       },
       error: (error) => {
         this.errorMessage = error.error.error;

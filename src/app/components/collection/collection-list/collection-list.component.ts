@@ -32,6 +32,20 @@ export class CollectionListComponent implements OnInit {
     private userService: UserService,
   ) {}
 
+    /**
+   * Maps raw collection data to the Collection interface.
+   * @param collectionData - Raw collection data from the server.
+   * @returns An array of Collection objects.
+   */
+    private mapToCollections(collectionData: any[]): Collection[] {
+      return collectionData.map((collection) => ({
+        id: collection.id,
+        user_id: collection.user_id,
+        card_name: collection.card_name,
+        card_id: collection.card_id,
+      }));
+    }
+
   /**
    * Lifecycle hook called after the component is initialized.
    * Retrieves the authenticated user's collections.
@@ -56,20 +70,6 @@ export class CollectionListComponent implements OnInit {
         console.error(error);
       }
     });
-  }
-
-  /**
-   * Maps raw collection data to the Collection interface.
-   * @param collectionData - Raw collection data from the server.
-   * @returns An array of Collection objects.
-   */
-  private mapToCollections(collectionData: any[]): Collection[] {
-    return collectionData.map((collection) => ({
-      id: collection.id,
-      user_id: collection.user_id,
-      card_name: collection.card_name,
-      card_id: collection.card_id,
-    }));
   }
 
 }

@@ -17,7 +17,7 @@ export class CollectionService {
   constructor(
     private http: HttpClient,
     private errorHandler: HttpErrorHandlerService,
-    private Token: TokenService,
+    private tokenService: TokenService,
     private AuthState: AuthStateService,
     private Router: Router
   ) {
@@ -30,7 +30,7 @@ export class CollectionService {
   // Create new collection
   create(formData: Object): Observable<any> {
     const apiUrl = `${this.apiBaseUrl}/create`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     console.log(formData);
 
@@ -49,10 +49,26 @@ export class CollectionService {
     );
   }
 
+  delete(collectionId: number): Observable<any> {
+    const apiUrl = `${this.apiBaseUrl}/delete/${collectionId}`;
+    const token = this.tokenService.get();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const requestOptions = {
+      headers: headers
+    };
+
+    return this.http.post(apiUrl, requestOptions).pipe(
+      catchError(this.errorHandler.handleError)
+    )
+  }
 
   getUserCollections(userId: number): Observable<any> {
     const apiUrl = `${this.apiBaseUrl}/user/${userId}`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -69,7 +85,7 @@ export class CollectionService {
 
   getCollection(collectionId: number): Observable<any> {
     const apiUrl = `${this.apiBaseUrl}/${collectionId}`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -86,7 +102,7 @@ export class CollectionService {
 
   createCollectedCardPrint(formData: Object): Observable<any> {
     const apiUrl = `http://myglobalset-back.test/api/collected-card-print/create`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -103,7 +119,7 @@ export class CollectionService {
 
   removeCollectedCardPrint(formData: Object): Observable<any> {
     const apiUrl = `http://myglobalset-back.test/api/collected-card-print/remove`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -120,7 +136,7 @@ export class CollectionService {
 
   isPrintInCollection(collectionId: number, scryfallId: string): Observable<boolean> {
     const apiUrl = `http://myglobalset-back.test/api/collected-card-print/is-print-in-collection`;
-    const token = this.Token.get();
+    const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
