@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CollectionService } from 'src/app/services/collection.service';
 import { UserService } from 'src/app/services/user.service';
 import { Collection } from 'src/app/models/collection.interface';
-import { Router } from '@angular/router';
 
+/**
+ * Component for displaying a list of user collections.
+ */
 @Component({
   selector: 'app-collection-list',
   templateUrl: './collection-list.component.html',
@@ -11,17 +13,29 @@ import { Router } from '@angular/router';
 })
 export class CollectionListComponent implements OnInit {
 
+  /** Array containing user collections. */
   collections: Collection[] = [];
 
-  // Page Title
-  pageTitle = 'Collections';
+  /** Error message for displaying any encountered issues. */
+  errorMessage: string = '';
 
+  /** Title of the page. */
+  pageTitle: string = 'Collections';
+
+  /**
+   * Constructor for the CollectionListComponent.
+   * @param collectionService - Service for handling collection-related operations.
+   * @param userService - Service for handling user-related operations.
+   */
   constructor(
     private collectionService: CollectionService,
     private userService: UserService,
-    private router: Router
   ) {}
 
+  /**
+   * Lifecycle hook called after the component is initialized.
+   * Retrieves the authenticated user's collections.
+   */
   ngOnInit(): void {
     this.userService.getAuthenticated().subscribe({
       next: (user) => {
@@ -31,17 +45,24 @@ export class CollectionListComponent implements OnInit {
               this.collections = this.mapToCollections(collectionData.collections);
             },
             error: (error) => {
+              this.errorMessage = error.error.error;
               console.error(error);
             }
           });
         }
       },
       error: (error) => {
+        this.errorMessage = error.error.error;
         console.error(error);
       }
     });
   }
 
+  /**
+   * Maps raw collection data to the Collection interface.
+   * @param collectionData - Raw collection data from the server.
+   * @returns An array of Collection objects.
+   */
   private mapToCollections(collectionData: any[]): Collection[] {
     return collectionData.map((collection) => ({
       id: collection.id,
