@@ -14,5 +14,6 @@ export interface Print {
   nonfoil: boolean,
   border: string,
   digital: boolean,
-  languages: Language[]
+  languages: Language[],
+  lang: Language,
 }

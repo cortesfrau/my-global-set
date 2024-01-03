@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, map, forkJoin, catchError, throwError } from 'rxjs';
+import { Observable, map, forkJoin, catchError, throwError, switchMap } from 'rxjs';
 import { Card } from '../models/card.interface';
 import { Print } from '../models/print.interface';
 import { LanguagesData, SetsLanguages } from 'src/shared/languages-dictionary';
@@ -110,4 +110,6 @@ export class ScryfallService {
       })
     );
   }
+
+
 }

@@ -1,5 +1,5 @@
 // collection-item.component.ts
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Collection } from 'src/app/models/collection.interface';
 import { CollectionService } from 'src/app/services/collection.service';
@@ -14,8 +14,12 @@ import { CollectionService } from 'src/app/services/collection.service';
 export class CollectionItemComponent implements OnInit {
 
   @Input() collection!: Collection;
+  @Output() collectionDeleted = new EventEmitter<Collection>();
 
   cardArtUrl: string | undefined;
+  isDeleting: boolean = false;
+
+  collectionStats: any;
 
   constructor(
     private scryfallService: ScryfallService,
@@ -24,6 +28,7 @@ export class CollectionItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCardArt();
+    this.getCollectionStats();
   }
 
   private loadCardArt(): void {
@@ -42,20 +47,31 @@ export class CollectionItemComponent implements OnInit {
   public confirmDelete(): void {
     const isConfirmed = window.confirm('Are you sure you want to delete this collection?');
     if (isConfirmed) {
-      this.deleteCollection();
+      this.isDeleting = true;
+      this.deleteCollection()
     }
   }
 
   public deleteCollection(): void {
     this.collectionService.delete(this.collection.id).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        this.collectionDeleted.emit(this.collection);
       },
       error: (error) => {
         console.error(error);
-      }
+      },
     });
   }
 
+  public getCollectionStats(): void {
+    this.collectionService.getCollectionStats(this.collection.id).subscribe({
+      next: (response) => {
+        this.collectionStats = response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    })
+  }
 
 }

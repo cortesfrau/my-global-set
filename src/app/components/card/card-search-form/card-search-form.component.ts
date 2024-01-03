@@ -7,7 +7,6 @@ import { UserService } from 'src/app/services/user.service';
 import { CollectionService } from 'src/app/services/collection.service';
 import { User } from 'src/app/models/user.interface';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({

@@ -1,13 +1,17 @@
+<app-loader *ngIf="isLoading"></app-loader>
 <app-page-header [title]="pageTitle"></app-page-header>
-<section class="wrapper">
+<section class="wrapper position-relative">
   <div class="container">
 
     <div *ngIf="errorMessage" class="alert alert-danger mb-4" role="alert">
       {{ errorMessage }}
     </div>
 
-    <div *ngFor="let collection of collections;last as isLast">
-      <app-collection-item  [collection]="collection"></app-collection-item>
+    <div *ngFor="let collection of collections; last as isLast">
+      <app-collection-item
+        [collection]="collection"
+        (collectionDeleted)="onCollectionDeleted($event)">
+      ></app-collection-item>
       <hr *ngIf="!isLast" class="custom-hr">
     </div>
 

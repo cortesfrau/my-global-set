@@ -1,4 +1,4 @@
-// Custom SCSS Variables
+// Bootstrap
 @import "./../../../../shared/styles/variables";
 @import "bootstrap/scss/bootstrap";
 
@@ -10,9 +10,17 @@
   background-color: transparent;
   align-items: center;
   color: $body-color;
-  display: flex;
   align-items: center;
-  padding: .5rem;
+  padding: .5rem 0;
+  transition: opacity 800ms ease-out;
+
+  @include media-breakpoint-up(md) {
+    padding: .5rem;
+  }
+
+  &.deleting {
+    opacity: 0;
+  }
 
   &:hover {
     background-color: $light;
@@ -23,60 +31,41 @@
     align-items: center;
     width: 100%;
 
-    .collection-item_title {
+    .collection-item_title,
+    .collection-item_stats {
       color: $body-color
     }
   }
 
   &_img {
-    width: 90px;
+    width: 25%;
+    max-width: 90px;
     border-radius: $border-radius;
   }
 
   &_title {
-    margin-left: 1rem;
+    margin: 0 1.5rem;
     font-size: $font-size-base;
-    width: 100%;
   }
 
-  &_options {
-    margin-left: auto;
+  &_stats {
+    font-size: $font-size-sm;
+    width: 50px;
+    margin: 0 1rem 0 auto;
+  }
 
-    &__gear {
-      border: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      background-color: transparent;
+  &_delete {
+    border: 0;
+    background-color: transparent;
+    color: $gray-600;
+
+    @media only screen and (min-width: 768px) {
       padding: .5rem;
-
-      &:hover, &:focus, &:target {
-        opacity: .5;
-      }
     }
 
-    .dropdown-menu {
-      border-radius: 0;
-      border: 0;
-      background-color: $light;
-      box-shadow: $box-shadow;
-      transform: translate(-40px, 0px);
-      min-width: 130px;
-
-      .dropdown-item {
-        font-size: $font-size-sm;
-
-        &:hover {
-          background-color: transparent;
-          opacity: .7;
-        }
-
-        i {
-          margin-right: .5rem;
-        }
-      }
+    &:hover {
+      color: $danger;
     }
   }
+
 }

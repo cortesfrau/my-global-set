@@ -18,14 +18,11 @@ export class CollectionService {
     private http: HttpClient,
     private errorHandler: HttpErrorHandlerService,
     private tokenService: TokenService,
-    private AuthState: AuthStateService,
-    private Router: Router
   ) {
 
     // Auth API base URL
     this.apiBaseUrl = 'http://myglobalset-back.test/api/collection';
-   }
-
+  }
 
   // Create new collection
   create(formData: Object): Observable<any> {
@@ -117,8 +114,8 @@ export class CollectionService {
     );
   }
 
-  removeCollectedCardPrint(formData: Object): Observable<any> {
-    const apiUrl = `http://myglobalset-back.test/api/collected-card-print/remove`;
+  addPrintToCollection(formData: Object): Observable<any> {
+    const apiUrl = `http://myglobalset-back.test/api/collected-card-print/create`;
     const token = this.tokenService.get();
 
     const headers = new HttpHeaders({
@@ -155,5 +152,24 @@ export class CollectionService {
       catchError(this.errorHandler.handleError)
     );
   }
+
+  getCollectionStats(collectionId: any): Observable<any> {
+    const apiUrl = `http://myglobalset-back.test/api/collection/stats/${collectionId}`;
+    const token = this.tokenService.get();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const requestOptions = {
+      headers: headers
+    };
+
+    return this.http.get(apiUrl, requestOptions).pipe(
+      catchError(this.errorHandler.handleError)
+    )
+  }
+
+
 
 }

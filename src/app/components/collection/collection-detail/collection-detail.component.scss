@@ -1,43 +1,77 @@
-// Custom SCSS Variables
+// Bootstrap
 @import "./../../../../shared/styles/variables";
+
 
 //--------------------------------//
 //--- Collection Detail Styles ---//
 //--------------------------------//
 
-
-
 .collected-card-item {
   display: flex;
-  border-radius: $border-radius;
-  background-color: $white;
+  background-color: transparent;
   align-items: center;
-  border-radius: $border-radius;
-  border: 1px solid $gray-300;
-  padding: .5rem;
   color: $body-color;
+  padding: .5rem 0;
+  transition: opacity 800ms ease-out;
 
-  &_left {
-    width: 30%;
+  @media only screen and (min-width: 768px) {
+    padding: .5rem;
   }
 
-  &_right {
-    width: 70%;
-    padding: 0 0 0 1rem;
+  &:hover {
+    background-color: $light;
   }
 
   &_img {
-
+    width: 20%;
+    max-width: 70px;
   }
 
-  &_name {
-    font-size: $font-size-base;
-    font-weight: $font-weight-bold;
+  &_meta {
+    margin: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    padding: .5rem 0;
+  }
+
+  &_actions {
+    margin-left: auto;
+
+    @media only screen and (min-width: 768px) {
+      margin-right: .5rem;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+
+      i {
+        margin-right: .33rem;
+      }
+    }
   }
 
   &_set {
+    font-size: $font-size-base;
+    margin-bottom: .5rem;
+  }
+
+  &_lang {
     font-size: $font-size-sm;
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    margin: 0 0 .5rem 0;
+
+    i {
+      border-radius: 100%;
+      margin-right: .33rem;
+    }
+  }
+
+  &_copy {
+    font-size: $font-size-sm;
+    margin: auto 0 0 0;
   }
 
   &.collected {
@@ -46,34 +80,5 @@
 
   }
 
-  @media only screen and (min-width: 768px) {
-
-    &_left {
-      width: 20%;
-    }
-
-    &_right {
-      width: 80%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-right: .5rem;
-    }
-
-    &_set {
-      margin-bottom: 0;
-    }
-
-    &_meta {
-      width: 70%;
-      padding-right: 1rem;
-    }
-
-    &_actions {
-      width: 30%;
-      text-align: right;
-    }
-
-  }
 
 }

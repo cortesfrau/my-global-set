@@ -29,6 +29,7 @@ $black: #000;
 $light: $gray-100;
 $dark: $gray-900;
 $primary: #501dff;
+$secondary: $gray-600;
 
 $gold: #FFD700;
 
@@ -41,6 +42,7 @@ $dark:          $gray-900;
 
 $theme-colors: (
   "primary":    $primary,
+  "secondary":  $secondary,
   "success":    $success,
   "info":       $info,
   "warning":    $warning,
@@ -58,7 +60,8 @@ $body-color: $dark;
 $spacer: 1rem;
 
 // Typo
-$font-family-base: 'Lato', sans-serif;
+// $font-family-base: 'Lato', sans-serif;
+$font-family-base: 'Barlow', sans-serif;
 $font-weight-light: 300;
 $font-weight-base: 400;
 $font-weight-bold: 700;
@@ -78,7 +81,7 @@ $line-height-lg: 1.75;
 $headings-line-height: $line-height-sm;
 
 // Radius
-$border-radius: 10px;
+$border-radius: 5px;
 
 // Box Shadow
 $box-shadow: 0 .5rem 1rem rgba($black, .15);

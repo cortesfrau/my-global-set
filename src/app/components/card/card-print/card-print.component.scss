@@ -10,15 +10,14 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid $gray-300;
 
   // Card print header
   &_header {
     display: flex;
     padding: .75rem 1rem .75rem 1rem;
-    border-bottom: 1px solid $gray-200;
     background-color: $light;
     align-items: center;
+    border-bottom: 1px solid $gray-200;
 
     &__left {
       width: auto;
@@ -44,6 +43,7 @@
   &_body {
     padding: 1rem;
     display: flex;
+    border-bottom: 1px solid $gray-200;
 
     &__left {
       width: calc(50% - .75rem);
@@ -62,13 +62,12 @@
     justify-content: flex-end;
     align-items: center;
     margin-top: auto;
-    border-top: 1px solid $gray-200;
     background-color: $light;
+    border-bottom: 1px solid $gray-200;
 
     &__item {
       display: flex;
       align-items: center;
-      border-left: 1px solid $gray-200;
       padding: .5rem .75rem;
       font-size: $font-size-sm;
 
@@ -87,10 +86,6 @@
       i {
         margin-right: .5rem;
       }
-
-      &:first-child {
-        border: 0;
-      }
     }
   }
 
@@ -101,7 +96,6 @@
     align-items: center;
     padding: .5rem .75rem;
     font-size: $font-size-sm;
-    border-top: 1px solid $gray-200;
     background-color: $light;
   }
 
@@ -151,4 +145,3 @@
     }
   }
 }
-

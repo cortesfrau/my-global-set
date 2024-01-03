@@ -3,46 +3,57 @@ import { Language } from "src/app/models/language.interface"
 export const LanguagesData: { [key: number]: Language } = {
   1: {
     name: "English",
+    code: "en",
     flag_icon: 'fi fi-gb fis'
   },
   2: {
     name: "Italian",
+    code: 'it',
     flag_icon: 'fi fi-it fis'
   },
   3: {
     name: "German",
+    code: 'de',
     flag_icon: 'fi fi-de fis'
   },
   4: {
     name: "French",
+    code: 'fr',
     flag_icon: 'fi fi-fr fis'
   },
   5: {
     name: "Spanish",
+    code: 'es',
     flag_icon: 'fi fi-es fis'
   },
   6: {
     name: "Portuguese",
+    code: 'pt',
     flag_icon: 'fi fi-pt fis'
   },
   7: {
     name: "Japanese",
+    code: 'jp',
     flag_icon: 'fi fi-jp fis'
   },
   8: {
     name: "Korean",
+    code: 'ko',
     flag_icon: 'fi fi-kr fis'
   },
   9: {
     name: "S-Chinese",
+    code: 'zhs',
     flag_icon: 'fi fi-cn fis'
   },
   10: {
     name: "T-Chinese",
+    code: 'zht',
     flag_icon: 'fi fi-tw fis'
   },
   11: {
     name: "Russian",
+    code: 'ru',
     flag_icon: 'fi fi-ru fis'
   }
 }

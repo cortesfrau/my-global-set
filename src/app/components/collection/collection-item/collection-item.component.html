@@ -1,21 +1,15 @@
-<div class="collection-item">
+<div class="collection-item" [class.deleting]="isDeleting">
 
   <a class="collection-item_link" routerLink="/collection/{{ collection.id }}">
     <img class="collection-item_img" src="{{ cardArtUrl }}" alt="{{ collection.card_name }}">
     <h2 class="collection-item_title">{{ collection.card_name }}</h2>
+    <div class="collection-item_stats">
+      {{ collectionStats.collected_prints_count }} / {{ collectionStats.total_prints_count }}
+    </div>
   </a>
 
-  <div class="collection-item_options dropstart">
-    <button class="collection-item_options__gear" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-gear-fill"></i>
-    </button>
-    <ul class="dropdown-menu">
-      <li>
-        <button class="dropdown-item text-danger" (click)="confirmDelete()">
-          <i class="bi bi-trash-fill"></i>Delete
-        </button>
-      </li>
-    </ul>
-  </div>
+  <button class="collection-item_delete" (click)="confirmDelete()">
+    <i class="bi bi-trash-fill"></i>
+  </button>
 
 </div>

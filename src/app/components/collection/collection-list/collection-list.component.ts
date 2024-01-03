@@ -22,6 +22,9 @@ export class CollectionListComponent implements OnInit {
   /** Title of the page. */
   pageTitle: string = 'Collections';
 
+  isLoading: boolean = true;
+
+
   /**
    * Constructor for the CollectionListComponent.
    * @param collectionService - Service for handling collection-related operations.
@@ -57,10 +60,12 @@ export class CollectionListComponent implements OnInit {
           this.collectionService.getUserCollections(user.id).subscribe({
             next: (collectionData) => {
               this.collections = this.mapToCollections(collectionData.collections);
+              this.isLoading = false;
             },
             error: (error) => {
               this.errorMessage = error.error.error;
               console.error(error);
+              this.isLoading = false;
             }
           });
         }
@@ -68,8 +73,13 @@ export class CollectionListComponent implements OnInit {
       error: (error) => {
         this.errorMessage = error.error.error;
         console.error(error);
-      }
+        this.isLoading = false;
+      },
     });
+  }
+
+  onCollectionDeleted(deletedCollection: Collection): void {
+    this.collections = this.collections.filter(collection => collection.id !== deletedCollection.id);
   }
 
 }
