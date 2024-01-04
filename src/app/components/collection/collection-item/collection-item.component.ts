@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Collection } from 'src/app/models/collection.interface';
 import { CollectionService } from 'src/app/services/collection.service';
+import { collectionStats } from 'src/app/models/collection-stats';
 
 @Component({
   selector: 'app-collection-item',
@@ -19,7 +20,11 @@ export class CollectionItemComponent implements OnInit {
   cardArtUrl: string | undefined;
   isDeleting: boolean = false;
 
-  collectionStats: any;
+  collectionStats: collectionStats = {
+    collected_prints_count: 0,
+    total_prints_count: 0,
+    completed_percentage: 0,
+  };
 
   constructor(
     private scryfallService: ScryfallService,

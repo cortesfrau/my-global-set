@@ -80,7 +80,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
       this.User.getAuthenticated().subscribe({
         next: (data: User) => {
           this.currentUserId = data.id;
-          console.log('Current user:', this.currentUserId);
         },
         error: (error: { message: string | null; }) => {
           console.error('Error retrieving user info:', error);
@@ -210,12 +209,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
   }
 
   public createCollection() {
-
-    this.User.getAuthenticated().subscribe({
-      next: (user) => {
-        console.log('User:', user);
-      }
-    })
 
     let data: any = {
       user_id: this.currentUserId,

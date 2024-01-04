@@ -1,3 +1,4 @@
+<app-loader *ngIf="isLoading"></app-loader>
 <app-page-header [title]="pageTitle"></app-page-header>
 <section class="wrapper">
   <div class="container">
@@ -5,32 +6,23 @@
 
       <div class="row g-3">
 
-        <div class="col-md-8 col-xl-7">
+        <div class="col-12">
 
           <div *ngFor="let print of card.prints; last as isLast">
             <div class="collected-card-item">
-
               <img class="collected-card-item_img" [src]="print.image_uri">
-
-
               <div class="collected-card-item_meta">
                 <h3 class="collected-card-item_set">{{ print.set_name }}</h3>
                 <p class="collected-card-item_lang"><i class="{{ print.lang.flag_icon }}"></i> {{ print.lang.name }}</p>
                 <p class="collected-card-item_copy">©{{ print.set_release_date | date:'yyyy' }} {{ print.artist }}</p>
               </div>
-
               <div class="collected-card-item_actions">
-                <button class="btn btn-sm btn-primary" (click)="addPrintToCollection(print)"><i class="bi bi-plus-circle"></i>Add</button>
+                <button class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)"><i class="bi bi-bookmark-plus-fill"></i></button>
               </div>
-
             </div>
             <hr *ngIf="!isLast" class="custom-hr">
           </div>
 
-        </div>
-
-        <div class="col-md-4 col-xl-5">
-          Stats
         </div>
 
       </div>

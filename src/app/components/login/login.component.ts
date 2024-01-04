@@ -72,14 +72,12 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (data) => {
-
           this.handleResponse(data);
-          console.log('User is logged in');
         },
         error: (error) => {
           this.showSpinner = false;
           this.errorMessage = error.error.error;
-          console.error('Error: the user couldn\'t log in.', error);
+          console.error(error);
         },
         complete: () => {
           this.showSpinner = false;

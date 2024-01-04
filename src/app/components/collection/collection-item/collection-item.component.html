@@ -4,7 +4,9 @@
     <img class="collection-item_img" src="{{ cardArtUrl }}" alt="{{ collection.card_name }}">
     <h2 class="collection-item_title">{{ collection.card_name }}</h2>
     <div class="collection-item_stats">
-      {{ collectionStats.collected_prints_count }} / {{ collectionStats.total_prints_count }}
+      <div class="collection-item_stats__rate">{{ collectionStats.collected_prints_count }} / {{ collectionStats.total_prints_count }}</div>
+      <div class="collection-item_stats__percentage">({{ collectionStats.completed_percentage }}%)</div>
+      <i *ngIf="collectionStats.completed_percentage === 100" class="bi bi-star-fill collection-item_stats__star"></i>
     </div>
   </a>
 

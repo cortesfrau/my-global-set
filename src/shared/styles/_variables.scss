@@ -51,7 +51,6 @@ $theme-colors: (
   "dark":       $dark
 );
 
-
 // Body
 $body-bg: $gray-200;
 $body-color: $dark;
@@ -60,7 +59,6 @@ $body-color: $dark;
 $spacer: 1rem;
 
 // Typo
-// $font-family-base: 'Lato', sans-serif;
 $font-family-base: 'Barlow', sans-serif;
 $font-weight-light: 300;
 $font-weight-base: 400;
@@ -89,10 +87,6 @@ $box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
 $box-shadow-lg: 0 1rem 3rem rgba($black, .175);
 $box-shadow-inset: inset 0 1px 2px rgba($black, .075);
 
-// Buttons
-$input-btn-padding-y: 1rem;
-$input-btn-padding-x: 1.5rem;
-
 // Links
 $link-decoration: none;
 
@@ -117,3 +111,16 @@ $transition-base: all .2s ease-in-out;
 
 // Offcanvas
 $offcanvas-border-width: 0;
+
+// Buttons
+$input-btn-padding-y: .5rem;
+$input-btn-padding-x: 1rem;
+$input-btn-font-size: $font-size-base;
+
+$input-btn-padding-y-sm: .375rem;
+$input-btn-padding-x-sm: .75rem;
+$input-btn-font-size-sm: $font-size-sm;
+
+$input-btn-padding-y-lg: .75rem;
+$input-btn-padding-x-lg: 1.25rem;
+$input-btn-font-size-lg: $font-size-lg;

@@ -22,8 +22,8 @@ export class CollectionListComponent implements OnInit {
   /** Title of the page. */
   pageTitle: string = 'Collections';
 
+  /** Tell if there is a current api call */
   isLoading: boolean = true;
-
 
   /**
    * Constructor for the CollectionListComponent.

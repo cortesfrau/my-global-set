@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CardSearchFormComponent } from './components/card/card-search-form/card-search-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CardPrintListComponent } from './components/card/card-print-list/card-print-list.component';
 import { CardPrintComponent } from './components/card/card-print/card-print.component';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -23,6 +23,7 @@ import { CollectionItemComponent } from './components/collection/collection-item
 import { CollectionDetailComponent } from './components/collection/collection-detail/collection-detail.component';
 import { FormSpinnerComponent } from './components/form-spinner/form-spinner.component';
 import { PageHeaderComponent } from './components/page/page-header/page-header.component';
+import { AuthInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,11 @@ import { PageHeaderComponent } from './components/page/page-header/page-header.c
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

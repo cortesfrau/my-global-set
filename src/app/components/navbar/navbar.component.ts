@@ -12,18 +12,17 @@ export class NavbarComponent {
   public loggedIn: boolean | undefined;
 
   constructor(
-    private AuthState: AuthStateService,
-    private Auth: AuthService,
+    private authStateService: AuthStateService,
+    private authService: AuthService,
   ){ }
 
   ngOnInit() {
-
-    this.AuthState.authStatus.subscribe(value => this.loggedIn = value);
+    this.authStateService.authStatus.subscribe(value => this.loggedIn = value);
   }
 
   logout(event: MouseEvent): void {
     event.preventDefault();
-    this.Auth.logout();
+    this.authService.logout();
   }
 
 }

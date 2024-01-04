@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Card } from 'src/app/models/card.interface';
 import { Collection } from 'src/app/models/collection.interface';
 import { CollectionService } from 'src/app/services/collection.service';
-import { ScryfallService } from 'src/app/services/scryfall.service';
-import { catchError, switchMap, tap } from 'rxjs/operators';
-import { EMPTY, Observable, forkJoin } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { EMPTY, Observable } from 'rxjs';
 import { Print } from 'src/app/models/print.interface';
 import { ScryvelService } from 'src/app/services/scryvel.service';
 
@@ -22,95 +21,55 @@ export class CollectionDetailComponent implements OnInit {
 
   pageTitle: string = '';
 
+  /** Tell if there is a current api call */
+  isLoading: boolean = true;
+
   constructor(
-    private scryfallService: ScryfallService,
     private collectionService: CollectionService,
     private activatedRoute: ActivatedRoute,
-
     private scryvelService: ScryvelService,
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.activatedRoute.paramMap.pipe(
-      switchMap(params => {
-        const idParam = params.get('id');
-        if (idParam !== null) {
-          this.collectionId = +idParam;
-        }
-        return this.collectionService.getCollection(this.collectionId);
-      }),
-      catchError(error => {
-        console.error('Error fetching collection data:', error);
-        return EMPTY;
-      }),
-      switchMap(collection => {
-        this.collection = collection;
-        console.log(this.collection);
-        return this.scryvelService.getCardByOracleId(collection.card_id);
-      }),
-      catchError(error => {
-        console.error('Error fetching card data:', error);
-        return EMPTY;
-      }),
-      switchMap(card => {
-        return this.scryvelService.getCardByOracleId(card.oracle_id);
-      }),
-      catchError(error => {
-        console.error('Error fetching card data by oracle id:', error);
-        return EMPTY;
-      })
-    ).subscribe(card => {
-      this.card = card;
-      this.pageTitle = card.name;
-      console.log('Card:', this.card);
-    });
+      switchMap(params => this.handleParams(params)),
+      catchError(error => this.handleParamsError(error)),
+      switchMap(collection => this.handleCollection(collection)),
+      catchError(error => this.handleCollectionError(error)),
+    ).subscribe(
+      card => this.handleCard(card)
+    );
   }
 
-  // loadCollectedPrints(): Observable<boolean[]> {
-  //   // Limpiar el conjunto antes de cargar
-  //   this.collectedPrints.clear();
+  private handleParams(params: ParamMap): Observable<Collection> {
+    const idParam = params.get('id');
+    if (idParam !== null) {
+      this.collectionId = +idParam;
+    }
+    return this.collectionService.getCollection(this.collectionId);
+  }
 
-  //   // Crear un array de observables para cada impresión
-  //   const observables: Observable<boolean>[] = this.card.prints.map(print =>
-  //     this.collectionService.isPrintInCollection(this.collectionId, print.id)
-  //   );
+  private handleCollection(collection: Collection): Observable<Card> {
+    this.collection = collection;
+    return this.scryvelService.getCardByOracleId(collection.card_id);
+  }
 
-  //   // Utilizar tap para manejar las respuestas de las observables
-  //   return forkJoin(observables).pipe(
-  //     tap((responses: boolean[]) => {
-  //       console.log('Responses:', responses);
-  //     })
-  //   );
-  // }
+  private handleCard(card: Card): void {
+    this.card = card;
+    this.pageTitle = card.name;
+    this.isLoading = false
+  }
 
-  // isPrintInCollection(printId: string): boolean {
-  //   return this.collectedPrints.has(printId);
-  // }
+  private handleParamsError(error: any): Observable<never> {
+    console.error('Error fetching collection data:', error);
+    return EMPTY;
+  }
 
-  // saveOrRemoveCollectedCardPrint(print: Print): void {
-  //   const formData = {
-  //     scryfall_id: print.id,
-  //     collection_id: this.collection.id,
-  //   };
-
-  //   const serviceCall = this.isPrintInCollection(print.id) ?
-  //     this.collectionService.removeCollectedCardPrint(formData) :
-  //     this.collectionService.createCollectedCardPrint(formData);
-
-  //   serviceCall.subscribe({
-  //     next: (response) => {
-  //       console.log(response.message);
-  //       if (this.isPrintInCollection(print.id)) {
-  //         this.collectedPrints.delete(print.id);
-  //       } else {
-  //         this.collectedPrints.add(print.id);
-  //       }
-  //     },
-  //     error: (error) => {
-  //       console.error('Error:', error);
-  //     }
-  //   });
-  // }
+  private handleCollectionError(error: any): Observable<never> {
+    console.error('Error fetching card data:', error);
+    return EMPTY;
+  }
 
   addPrintToCollection(print: Print): void {
 

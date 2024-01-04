@@ -47,7 +47,7 @@ export class AuthService {
   logout() {
     this.AuthState.changeAuthStatus(false);
     this.Token.remove();
-    this.Router.navigateByUrl('/');
+    this.Router.navigateByUrl('/login');
   }
 
   // Password Reset Link
