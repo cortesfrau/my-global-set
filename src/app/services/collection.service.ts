@@ -97,6 +97,23 @@ export class CollectionService {
     );
   }
 
+  getCollectionContent(collectionId: number): Observable<any> {
+    const apiUrl = `${this.apiBaseUrl}/content/${collectionId}`;
+    const token = this.tokenService.get();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const requestOptions = {
+      headers: headers
+    };
+
+    return this.http.get(apiUrl, requestOptions).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
   createCollectedCardPrint(formData: Object): Observable<any> {
     const apiUrl = `http://myglobalset-back.test/api/collected-card-print/create`;
     const token = this.tokenService.get();
@@ -116,6 +133,23 @@ export class CollectionService {
 
   addPrintToCollection(formData: Object): Observable<any> {
     const apiUrl = `http://myglobalset-back.test/api/collected-card-print/create`;
+    const token = this.tokenService.get();
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    const requestOptions = {
+      headers: headers
+    };
+
+    return this.http.post(apiUrl, formData, requestOptions).pipe(
+      catchError(this.errorHandler.handleError)
+    );
+  }
+
+  removePrintFromCollection(formData: Object): Observable<any> {
+    const apiUrl = `http://myglobalset-back.test/api/collected-card-print/remove`;
     const token = this.tokenService.get();
 
     const headers = new HttpHeaders({

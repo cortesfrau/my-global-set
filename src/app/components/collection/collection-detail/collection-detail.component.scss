@@ -15,16 +15,24 @@
   transition: opacity 800ms ease-out;
 
   @media only screen and (min-width: 768px) {
-    padding: .5rem;
+    padding: 1rem;
   }
 
   &:hover {
     background-color: $light;
   }
 
+  &--collected {
+    background-color: rgba($primary, 5%);
+
+    &:hover {
+      background-color: rgba($primary, 3%);
+    }
+  }
+
   &_img {
-    width: 20%;
-    max-width: 90px;
+    width: 25%;
+    max-width: 120px;
     box-shadow: $box-shadow;
   }
 
@@ -45,7 +53,7 @@
     margin-left: auto;
 
     @media only screen and (min-width: 768px) {
-      margin-right: .5rem;
+      margin-right: 1rem;
     }
 
     .btn {
@@ -92,12 +100,17 @@
     justify-content: center;
     text-align: center;
     background-color: transparent;
+    color: $gray-600;
 
     &--add {
-      color: $gray-600;
-
       &:hover {
         color: $primary;
+      }
+    }
+
+    &--remove {
+      &:hover {
+        color: $danger;
       }
     }
   }

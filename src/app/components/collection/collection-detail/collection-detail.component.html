@@ -3,13 +3,10 @@
 <section class="wrapper">
   <div class="container">
     <div *ngIf="card">
-
       <div class="row g-3">
-
         <div class="col-12">
-
           <div *ngFor="let print of card.prints; last as isLast">
-            <div class="collected-card-item">
+            <div class="collected-card-item" [ngClass]="{'collected-card-item--collected': print.is_collected}">
               <img class="collected-card-item_img" [src]="print.image_uri">
               <div class="collected-card-item_meta">
                 <h3 class="collected-card-item_set">{{ print.set_name }}</h3>
@@ -17,14 +14,17 @@
                 <p class="collected-card-item_copy">©{{ print.set_release_date | date:'yyyy' }} {{ print.artist }}</p>
               </div>
               <div class="collected-card-item_actions">
-                <button class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)"><i class="bi bi-bookmark-plus-fill"></i></button>
+                <button *ngIf="!print.is_collected" class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)">
+                  <i class="bi bi-bookmark-plus-fill"></i>
+                </button>
+                <button *ngIf="print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="removePrintFromCollection(print)">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
               </div>
             </div>
             <hr *ngIf="!isLast" class="custom-hr">
           </div>
-
         </div>
-
       </div>
     </div>
   </div>
