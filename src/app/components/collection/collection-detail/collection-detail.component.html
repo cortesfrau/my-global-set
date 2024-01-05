@@ -3,10 +3,15 @@
 <section class="wrapper">
   <div class="container">
     <div *ngIf="card">
-      <div class="row g-3">
-        <div class="col-12">
+      <div class="row g-4">
+        <div class="col-md-8">
           <div *ngFor="let print of card.prints; last as isLast">
             <div class="collected-card-item" [ngClass]="{'collected-card-item--collected': print.is_collected}">
+
+              <div *ngIf="print.is_collected" class="collected-card-item_star">
+                <i class="bi bi-star-fill"></i>
+              </div>
+
               <img class="collected-card-item_img" [src]="print.image_uri">
               <div class="collected-card-item_meta">
                 <h3 class="collected-card-item_set">{{ print.set_name }}</h3>
@@ -14,15 +19,41 @@
                 <p class="collected-card-item_copy">©{{ print.set_release_date | date:'yyyy' }} {{ print.artist }}</p>
               </div>
               <div class="collected-card-item_actions">
-                <button *ngIf="!print.is_collected" class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)">
+                <app-form-spinner *ngIf="printLoadingStates[print.id]"></app-form-spinner>
+                <button *ngIf="!print.is_collected && !printLoadingStates[print.id]" class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)">
                   <i class="bi bi-bookmark-plus-fill"></i>
                 </button>
-                <button *ngIf="print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="removePrintFromCollection(print)">
+                <button *ngIf="!printLoadingStates[print.id] && print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="removePrintFromCollection(print)">
                   <i class="bi bi-trash-fill"></i>
                 </button>
               </div>
             </div>
             <hr *ngIf="!isLast" class="custom-hr">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="collection-stats">
+            <div class="collection-stats_header">
+              <h2 class="collection-stats_title">Collection stats</h2>
+            </div>
+            <div class="collection-stats_body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Total prints
+                  <span class="badge bg-primary rounded-pill">{{ collection_stats.total_prints_count }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Total prints in collection
+                  <span class="badge bg-primary rounded-pill">{{ collection_stats.collected_prints_count }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Percentage collected
+                  <span class="badge bg-primary rounded-pill">{{ collection_stats.completed_percentage }}%</span>
+                </li>
+              </ul>
+
+            </div>
           </div>
         </div>
       </div>
