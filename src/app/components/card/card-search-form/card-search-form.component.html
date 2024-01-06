@@ -41,10 +41,18 @@
           </div>
 
           <div class="col-auto ms-auto">
-            <button class="btn btn-secondary mx-2" type="button" (click)="clearForm()">Clear form</button>
+            <button class="btn btn-secondary m-2" type="button" (click)="clearForm()">Clear form</button>
             <button class="btn btn-primary" type="submit">Search card</button>
 
-            <button *ngIf="showCollectionBtn()" class="btn btn-success mx-2" (click)="createCollection()">Start a collection of this card</button>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You need to be logged in to start a collection.">
+              <button *ngIf="card && !isEmptyObject(card) && !currentUserId" class="btn btn-success ms-2" (click)="createCollection()" disabled>
+                Start a collection of this card
+              </button>
+            </span>
+
+            <button *ngIf="card && !isEmptyObject(card) && currentUserId" class="btn btn-success ms-2" (click)="createCollection()">
+              Start a collection of this card
+            </button>
 
           </div>
 

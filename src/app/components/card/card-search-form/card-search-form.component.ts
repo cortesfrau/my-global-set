@@ -8,6 +8,7 @@ import { CollectionService } from 'src/app/services/collection.service';
 import { User } from 'src/app/models/user.interface';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-card-search-form',
@@ -43,9 +44,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     private scryfallService: ScryfallService,
     private User: UserService,
     private Collection: CollectionService,
-    private Router: Router,
     private Token: TokenService,
-    private cdr: ChangeDetectorRef
 
   ) {
 
@@ -88,6 +87,11 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
         }
       });
     }
+
+    // Enable Bootstrap Popovers
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = Array.from(popoverTriggerList).map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
   }
 
   // Getter for form controls to facilitate access to form fields.
@@ -107,6 +111,7 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     this.submitted = false; // Resets the 'submitted' state.
     this.isLoading = false; // Can reset the loading state if necessary.
     this.errorMessage = null; // Reset search errors.
+    this.successMessage = null; // Reset success message.
     this.showDigitalPrints = false;
 
     const checkboxElement = document.getElementById('showDigitalPrints') as HTMLInputElement;
@@ -115,10 +120,6 @@ export class CardSearchFormComponent implements OnInit, OnDestroy {
     }
 
     localStorage.removeItem('lastSearchedCard'); // Clears the card stored in localStorage.
-  }
-
-  showCollectionBtn(): boolean {
-    return this.card && !this.isEmptyObject(this.card) && this.currentUserId != null;
   }
 
   isEmptyObject(obj: any): boolean {

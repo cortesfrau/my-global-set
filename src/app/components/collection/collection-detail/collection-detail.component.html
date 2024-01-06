@@ -1,12 +1,15 @@
-<app-loader *ngIf="isLoading"></app-loader>
+<app-loader *ngIf="!isPageLoaded()"></app-loader>
 <app-page-header [title]="pageTitle"></app-page-header>
 <section class="wrapper">
   <div class="container">
     <div *ngIf="card">
       <div class="row g-4">
         <div class="col-md-8">
-          <div *ngFor="let print of card.prints; last as isLast">
-            <div class="collected-card-item" [ngClass]="{'collected-card-item--collected': print.is_collected}">
+          <div *ngFor="let print of card.prints; last as isLast, first as isFirst">
+            <div class="collected-card-item" [ngClass]="{
+              'collected-card-item--collected': print.is_collected,
+              'collected-card-item--first' : isFirst
+              }">
 
               <div *ngIf="print.is_collected" class="collected-card-item_star">
                 <i class="bi bi-star-fill"></i>
@@ -32,12 +35,12 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="collection-stats">
+
+          <div class="collection-stats sticky-md-top">
             <div class="collection-stats_header">
               <h2 class="collection-stats_title">Collection stats</h2>
             </div>
             <div class="collection-stats_body">
-
               <ul class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   Total prints
@@ -52,9 +55,10 @@
                   <span class="badge bg-primary rounded-pill">{{ collection_stats.completed_percentage }}%</span>
                 </li>
               </ul>
-
             </div>
           </div>
+
+
         </div>
       </div>
     </div>
