@@ -64,15 +64,27 @@
   }
 
   &_set {
-    font-size: $font-size-base;
     margin-bottom: .75rem;
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      width: 30px;
+      max-height: 30px;
+      margin-right: .75rem;
+    }
+
+    &__name {
+      font-size: $font-size-base;
+      margin: 0;
+    }
   }
 
   &_lang {
     font-size: $font-size-sm;
     display: flex;
     align-items: center;
-    margin: 0 0 .5rem 0;
+    margin: auto 0 .5rem 0;
 
     i {
       border-radius: 100%;
@@ -84,7 +96,7 @@
 
   &_copy {
     font-size: $font-size-sm;
-    margin: auto 0 0 0;
+    margin: 0;
   }
 
   &_btn {
