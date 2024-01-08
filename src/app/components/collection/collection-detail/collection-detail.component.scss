@@ -21,13 +21,12 @@
   }
 
   &--collected {
-    // background-color: rgba($primary, 5%);
     background-color: $light;
   }
 
   &_img {
-    width: 25%;
-    max-width: 110px;
+    width: 20%;
+    max-width: 100px;
     box-shadow: $box-shadow;
     margin: .5rem;
   }
@@ -42,7 +41,6 @@
 
     @media only screen and (min-width: 768px) {
       margin: 0 1rem;
-      padding: 2rem 0;
     }
   }
 
@@ -163,19 +161,6 @@
 
   &.sticky-md-top {
     top: 1.5rem;
-  }
-}
-
-// Collection Filter
-.collection-filter {
-  display: flex;
-  align-items: center;
-  margin-bottom: .5rem;
-
-  &_title {
-    font-size: $font-size-base;
-    min-width: 50px;
-    margin: 0 1rem 0 0;
   }
 }
 

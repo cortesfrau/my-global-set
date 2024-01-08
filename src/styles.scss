@@ -8,10 +8,7 @@
 @import "bootstrap-icons/font/bootstrap-icons.scss";
 
 // Fonts
-// @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;1,300;1,400;1,700&display=swap');
 
 // Flags Icons
 @import 'flag-icons/css/flag-icons.min.css';
@@ -29,7 +26,6 @@ img {
   max-width: 100%;
 }
 
-
 //-------------//
 //--- Forms ---//
 //-------------//
@@ -38,4 +34,19 @@ img {
 }
 input:focus::placeholder {
   color: transparent;
+}
+
+//-------------------------//
+//--- Collection Filter ---//
+//-------------------------//
+.collection-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: .5rem;
+
+  &_title {
+    font-size: $font-size-base;
+    min-width: 50px;
+    margin: 0 1rem 0 0;
+  }
 }

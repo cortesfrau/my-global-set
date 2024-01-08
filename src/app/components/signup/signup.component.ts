@@ -7,7 +7,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { passwordMatchingValidator } from 'src/shared/validators/custom-validators';
 
 /**
- * Component for handling user signup.
+ * Component for user signup.
  */
 @Component({
   selector: 'app-signup',
@@ -65,7 +65,6 @@ export class SignupComponent {
     this.successMessage = 'Your account has been created.';
     this.tokenService.handle(data.access_token);
     this.authStateService.changeAuthStatus(true);
-    // Redirect to profile after a delay of 2000 milliseconds (2 seconds).
     setTimeout(() => {
       this.router.navigateByUrl('/profile');
     }, 2000);
@@ -83,11 +82,11 @@ export class SignupComponent {
       this.authService.signup(this.signupForm.value).subscribe({
         next: (data) => {
           this.handleResponse(data);
-          console.log('Sign Up successful');
+          console.log('Sign up successful');
         },
         error: (error) => {
           this.showSpinner = false;
-          this.errorMessage = error.message || 'An error occurred.';
+          this.errorMessage = error.error.message || 'An error occurred.';
           console.error('Error creating account:', error);
         },
         complete: () => {

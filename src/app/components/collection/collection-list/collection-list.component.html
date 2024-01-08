@@ -1,19 +1,40 @@
 <app-loader *ngIf="isLoading"></app-loader>
 <app-page-header [title]="pageTitle"></app-page-header>
-<section class="wrapper position-relative">
+
+<div class="wrapper">
   <div class="container">
 
     <div *ngIf="errorMessage" class="alert alert-danger mb-4" role="alert">
       {{ errorMessage }}
     </div>
 
-    <div *ngFor="let collection of collections; last as isLast">
-      <app-collection-item
-        [collection]="collection"
-        (collectionDeleted)="onCollectionDeleted($event)">
-      ></app-collection-item>
-      <hr *ngIf="!isLast" class="custom-hr">
-    </div>
+    <section *ngIf="collections && collections.length > 1" class="wrapper-bottom">
+      <div class="collection-filter">
+        <h4 class="collection-filter_title">Sort by</h4>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Order by">
+          <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'card_name'" (click)="changeSortCriteria('card_name')">Card name</button>
+          <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'completed'" (click)="changeSortCriteria('completed')">Completed</button>
+        </div>
+      </div>
+      <div class="collection-filter">
+        <h4 class="collection-filter_title">Order</h4>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Order">
+          <button type="button" class="btn btn-outline-primary" [class.active]="sortOrder === 'asc'" (click)="changeSortOrder('asc')">Asc</button>
+          <button type="button" class="btn btn-outline-primary" [class.active]="sortOrder === 'desc'" (click)="changeSortOrder('desc')">Desc</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div *ngFor="let collection of collections; last as isLast">
+        <app-collection-item
+          [collection]="collection"
+          (collectionDeleted)="onCollectionDeleted($event)">
+        ></app-collection-item>
+        <hr *ngIf="!isLast" class="custom-hr">
+      </div>
+    </section>
 
   </div>
-</section>
+</div>
+

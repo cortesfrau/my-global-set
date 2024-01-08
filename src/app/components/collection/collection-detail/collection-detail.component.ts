@@ -258,4 +258,5 @@ export class CollectionDetailComponent implements OnInit {
         return '';
     }
   }
+
 }

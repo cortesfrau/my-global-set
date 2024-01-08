@@ -6,25 +6,23 @@
       <div class="row g-4">
         <div class="col-md-8">
 
-          <div class="row justify-content-end mb-4">
-            <div class="col-auto">
-              <div class="collection-filter">
-                <h4 class="collection-filter_title">Sort by</h4>
-                <div class="btn-group btn-group-sm" role="group" aria-label="Order by">
-                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'set_release_date'" (click)="changeSortCriteria('set_release_date')">Release date</button>
-                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'collected'" (click)="changeSortCriteria('collected')">Collected</button>
-                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'artist'" (click)="changeSortCriteria('artist')">Artist</button>
-                </div>
-              </div>
-              <div class="collection-filter">
-                <h4 class="collection-filter_title">Order</h4>
-                <div class="btn-group btn-group-sm" role="group" aria-label="Order">
-                  <button type="button" (click)="changeSortOrder('asc')" [class.active]="sortOrder === 'asc'" class="btn btn-outline-primary">Asc</button>
-                  <button type="button" (click)="changeSortOrder('desc')" [class.active]="sortOrder === 'desc'" class="btn btn-outline-primary">Desc</button>
-                </div>
+          <section class="wrapper">
+            <div class="collection-filter">
+              <h4 class="collection-filter_title">Sort by</h4>
+              <div class="btn-group btn-group-sm" role="group" aria-label="Order by">
+                <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'set_release_date'" (click)="changeSortCriteria('set_release_date')">Release date</button>
+                <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'collected'" (click)="changeSortCriteria('collected')">Collected</button>
+                <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'artist'" (click)="changeSortCriteria('artist')">Artist</button>
               </div>
             </div>
-          </div>
+            <div class="collection-filter">
+              <h4 class="collection-filter_title">Order</h4>
+              <div class="btn-group btn-group-sm" role="group" aria-label="Order">
+                <button type="button" class="btn btn-outline-primary" [class.active]="sortOrder === 'asc'" (click)="changeSortOrder('asc')">Asc</button>
+                <button type="button" class="btn btn-outline-primary" [class.active]="sortOrder === 'desc'" (click)="changeSortOrder('desc')">Desc</button>
+              </div>
+            </div>
+          </section>
 
           <div *ngFor="let print of card.prints; last as isLast, first as isFirst">
             <div class="collected-card-item" [ngClass]="{

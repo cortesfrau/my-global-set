@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-
 @Component({
   selector: 'app-notification-block',
   templateUrl: './notification-block.component.html',
@@ -13,5 +12,4 @@ export class NotificationBlockComponent {
     this.collapseIsOpen = !this.collapseIsOpen;
   }
 
-  
 }
