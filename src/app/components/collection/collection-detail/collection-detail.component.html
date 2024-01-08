@@ -5,6 +5,27 @@
     <div *ngIf="card">
       <div class="row g-4">
         <div class="col-md-8">
+
+          <div class="row justify-content-end mb-4">
+            <div class="col-auto">
+              <div class="collection-filter">
+                <h4 class="collection-filter_title">Sort by</h4>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Order by">
+                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'set_release_date'" (click)="changeSortCriteria('set_release_date')">Release date</button>
+                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'collected'" (click)="changeSortCriteria('collected')">Collected</button>
+                  <button type="button" class="btn btn-outline-primary" [class.active]="sortCriteria === 'artist'" (click)="changeSortCriteria('artist')">Artist</button>
+                </div>
+              </div>
+              <div class="collection-filter">
+                <h4 class="collection-filter_title">Order</h4>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Order">
+                  <button type="button" (click)="changeSortOrder('asc')" [class.active]="sortOrder === 'asc'" class="btn btn-outline-primary">Asc</button>
+                  <button type="button" (click)="changeSortOrder('desc')" [class.active]="sortOrder === 'desc'" class="btn btn-outline-primary">Desc</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div *ngFor="let print of card.prints; last as isLast, first as isFirst">
             <div class="collected-card-item" [ngClass]="{
               'collected-card-item--collected': print.is_collected,
@@ -24,7 +45,7 @@
               <div class="collected-card-item_actions">
                 <app-form-spinner *ngIf="printLoadingStates[print.id]"></app-form-spinner>
                 <button *ngIf="!print.is_collected && !printLoadingStates[print.id]" class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)">
-                  <i class="bi bi-bookmark-plus-fill"></i>
+                  <i class="bi bi-bookmark-fill"></i>
                 </button>
                 <button *ngIf="!printLoadingStates[print.id] && print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="removePrintFromCollection(print)">
                   <i class="bi bi-trash-fill"></i>

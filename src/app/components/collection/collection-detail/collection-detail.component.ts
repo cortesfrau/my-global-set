@@ -29,6 +29,10 @@ export class CollectionDetailComponent implements OnInit {
     completed_percentage: 0
   }
 
+  // Sort prints
+  sortCriteria: string = 'set_release_date';
+  sortOrder: 'asc' | 'desc' = 'asc';
+
   // Subject to notify observers when the collection is updated
   private collectionUpdatedSubject = new Subject<void>();
   collectionUpdated$ = this.collectionUpdatedSubject.asObservable();
@@ -59,7 +63,6 @@ export class CollectionDetailComponent implements OnInit {
       card => {
         this.handleCard(card);
         this.getCollectionStats();
-        // Mark the page as loaded when all operations are completed
         this.pageLoaded = true;
       }
     );
@@ -166,19 +169,11 @@ export class CollectionDetailComponent implements OnInit {
 
     this.collectionService.removePrintFromCollection(data).subscribe({
       next: (response) => {
-        this.collectionService.getCollectionContent(this.collection.id).subscribe({
-          next: (response) => {
-            this.handleCard(response);
-            this.updateCollectionStats();
-            this.collectionUpdatedSubject.next();
-            this.cdr.detectChanges();
-            this.printLoadingStates[print.id] = false;
-          },
-          error: (error) => {
-            console.error('Error:', error);
-            this.printLoadingStates[print.id] = false;
-          }
-        });
+        this.handleCard(response);
+        this.updateCollectionStats();
+        this.collectionUpdatedSubject.next();
+        this.cdr.detectChanges();
+        this.printLoadingStates[print.id] = false;
       },
       error: (error) => {
         console.error(error);
@@ -234,4 +229,55 @@ export class CollectionDetailComponent implements OnInit {
     return this.pageLoaded && this.areAllElementsLoaded();
   }
 
+  /**
+   * Changes the sorting criteria and updates the order of prints accordingly.
+   * @param criteria - The sorting criteria to apply.
+   */
+  changeSortCriteria(criteria: string): void {
+    this.sortCriteria = criteria;
+    this.sortPrints();
+  }
+
+  /**
+   * Changes the sorting order and updates the order of prints accordingly.
+   * @param order - The sorting order to apply ('asc' or 'desc').
+   */
+  changeSortOrder(order: 'asc' | 'desc'): void {
+    this.sortOrder = order;
+    this.sortPrints();
+  }
+
+  /**
+   * Sorts the prints based on the selected criteria and order.
+   */
+  sortPrints(): void {
+    this.card.prints.sort((a, b) => {
+      const valueA = this.getSortValue(a);
+      const valueB = this.getSortValue(b);
+
+      if (this.sortOrder === 'asc') {
+        return valueA.localeCompare(valueB);
+      } else {
+        return valueB.localeCompare(valueA);
+      }
+    });
+  }
+
+  /**
+   * Gets the sorting value for a print based on the selected criteria.
+   * @param print - The print to retrieve the sorting value for.
+   * @returns The sorting value for the print.
+   */
+  getSortValue(print: Print): string {
+    switch (this.sortCriteria) {
+      case 'set_release_date':
+        return print.set_release_date;
+      case 'collected':
+        return print.is_collected ? '1' : '0';
+      case 'artist':
+        return print.artist;
+      default:
+        return '';
+    }
+  }
 }

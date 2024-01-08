@@ -69,21 +69,24 @@
     }
 
     &__star {
-      color: $yellow;
+      color: $primary;
       margin-left: 1.25rem;
-      font-size: $font-size-base;
+      font-size: 17px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+      position: relative;
+      top: -1px;
     }
   }
 
   &_delete {
     border: 0;
     background-color: transparent;
-    color: $gray-600;
+    color: $dark;
+    font-size: $font-size-lg;
 
     @media only screen and (min-width: 768px) {
       padding: .5rem;

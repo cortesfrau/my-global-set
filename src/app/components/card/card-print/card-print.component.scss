@@ -17,7 +17,6 @@
     padding: .75rem 1rem .75rem 1rem;
     background-color: $light;
     align-items: center;
-    border-bottom: 1px solid $gray-200;
 
     &__left {
       width: auto;
@@ -43,7 +42,6 @@
   &_body {
     padding: 1rem;
     display: flex;
-    border-bottom: 1px solid $gray-200;
 
     &__left {
       width: calc(50% - .75rem);
@@ -63,7 +61,6 @@
     align-items: center;
     margin-top: auto;
     background-color: $light;
-    border-bottom: 1px solid $gray-200;
 
     &__item {
       display: flex;
@@ -110,7 +107,6 @@
   &_name {
     font-size: $font-size-base;
     margin-bottom: .25rem;
-    font-weight: $font-weight-bold;
   }
 
   // Card print set name
