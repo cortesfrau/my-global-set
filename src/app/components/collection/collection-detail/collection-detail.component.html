@@ -44,10 +44,10 @@
               </div>
               <div class="collected-card-item_actions">
                 <app-form-spinner *ngIf="printLoadingStates[print.id]"></app-form-spinner>
-                <button *ngIf="!print.is_collected && !printLoadingStates[print.id]" class="collected-card-item_btn collected-card-item_btn--add" (click)="addPrintToCollection(print)">
+                <button *ngIf="!print.is_collected && !printLoadingStates[print.id]" class="collected-card-item_btn collected-card-item_btn--add" (click)="updatePrintInCollection(print, 'add')">
                   <i class="bi bi-bookmark-fill"></i>
                 </button>
-                <button *ngIf="!printLoadingStates[print.id] && print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="removePrintFromCollection(print)">
+                <button *ngIf="!printLoadingStates[print.id] && print.is_collected" class="collected-card-item_btn collected-card-item_btn--remove" (click)="updatePrintInCollection(print, 'remove')">
                   <i class="bi bi-trash-fill"></i>
                 </button>
               </div>

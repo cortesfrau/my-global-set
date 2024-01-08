@@ -121,10 +121,11 @@ export class CollectionDetailComponent implements OnInit {
   }
 
   /**
-   * Adds a print to the collection and updates the component state accordingly.
-   * @param print - The print to add to the collection.
+   * Updates a print in the collection based on the specified action.
+   * @param print - The print to update.
+   * @param action - The action to perform ('add' or 'remove').
    */
-  addPrintToCollection(print: Print): void {
+  public updatePrintInCollection(print: Print, action: 'add' | 'remove'): void {
     this.printLoadingStates[print.id] = true;
 
     const data = {
@@ -132,7 +133,11 @@ export class CollectionDetailComponent implements OnInit {
       collection_id: this.collection.id,
     };
 
-    this.collectionService.addPrintToCollection(data).subscribe({
+    const updateCollectionObservable = action === 'add'
+      ? this.collectionService.addPrintToCollection(data)
+      : this.collectionService.removePrintFromCollection(data);
+
+    updateCollectionObservable.subscribe({
       next: (response) => {
         this.collectionService.getCollectionContent(this.collection.id).subscribe({
           next: (response) => {
@@ -147,33 +152,6 @@ export class CollectionDetailComponent implements OnInit {
             this.printLoadingStates[print.id] = false;
           }
         });
-      },
-      error: (error) => {
-        console.error(error);
-        this.printLoadingStates[print.id] = false;
-      }
-    });
-  }
-
-  /**
-   * Removes a print from the collection and updates the component state accordingly.
-   * @param print - The print to remove from the collection.
-   */
-  removePrintFromCollection(print: Print): void {
-    this.printLoadingStates[print.id] = true;
-
-    const data = {
-      scryfall_id: print.id,
-      collection_id: this.collection.id,
-    };
-
-    this.collectionService.removePrintFromCollection(data).subscribe({
-      next: (response) => {
-        this.handleCard(response);
-        this.updateCollectionStats();
-        this.collectionUpdatedSubject.next();
-        this.cdr.detectChanges();
-        this.printLoadingStates[print.id] = false;
       },
       error: (error) => {
         console.error(error);

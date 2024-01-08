@@ -2,13 +2,14 @@
 //--- Navbar Styles ---//
 //---------------------//
 .navbar {
-  min-height: 70px;
+  padding: .5rem;
 }
 .navbar-brand {
   font-size: 1.25rem;
+  padding: .75rem 0;
 
   img {
     height: auto;
-    max-width: 165px;
+    max-width: 150px;
   }
 }
