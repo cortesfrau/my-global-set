@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 /**
  * Service for managing authentication tokens.
@@ -8,15 +9,19 @@ import { Injectable } from '@angular/core';
 })
 export class TokenService {
 
+  apiBaseUrl: string;
+
+  constructor() {
+    this.apiBaseUrl = `${environment.API_URL}`;
+   }
+
   /**
    * Defines the expected issuer URLs for login and signup.
    */
   private iss = {
-    login: 'http://myglobalset-back.test/api/auth/login',
-    signup: 'http://myglobalset-back.test/api/auth/signup'
+    login: `${environment.API_URL}/auth/login`,
+    signup: `${environment.API_URL}/auth/signup`
   }
-
-  constructor() { }
 
   /**
    * Handles the received token by storing it in local storage.

@@ -1,15 +1,33 @@
+// Bootstrap
+@import "./../../../shared/styles/variables";
+
 //---------------------//
 //--- Navbar Styles ---//
 //---------------------//
 .navbar {
   padding: .5rem;
+  min-height: 73px;
 }
 .navbar-brand {
   font-size: 1.25rem;
   padding: .75rem 0;
+  transition: $transition-base;
+
+  &:hover {
+    opacity: .75;
+  }
 
   img {
     height: auto;
-    max-width: 150px;
+    max-width: 155px;
+  }
+}
+
+// Offcanvas
+.offcanvas-title {
+
+  img {
+    height: auto;
+    max-width: 155px;
   }
 }

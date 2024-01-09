@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorHandlerService } from './http-error-handler.service';
 import { TokenService } from './token.service';
 import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,15 @@ export class ScryvelService {
     private errorHandler: HttpErrorHandlerService,
     private tokenService: TokenService,
   ) {
-
-    this.apiBaseUrl = 'http://myglobalset-back.test/api/scryfall';
+    // Set the base URL for Scryfall API calls
+    this.apiBaseUrl = `${environment.API_URL}/scryfall`;
   }
 
+  /**
+   * Get card details by Oracle ID from the Scryfall API.
+   * @param oracleId - The Oracle ID of the card.
+   * @returns An observable with the Scryfall API response for the specified card.
+   */
   getCardByOracleId(oracleId: string): Observable<any> {
     const apiUrl = `${this.apiBaseUrl}/card/id/${oracleId}`;
     const token = this.tokenService.get();
@@ -36,6 +42,5 @@ export class ScryvelService {
       catchError(this.errorHandler.handleError)
     );
   }
-
 
 }

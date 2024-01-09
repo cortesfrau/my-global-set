@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { TokenService } from './token.service';
 import { AuthStateService } from './auth-state.service';
 import { Router } from '@angular/router';
 import { HttpErrorHandlerService } from './http-error-handler.service';
-
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,14 @@ export class AuthService {
     private AuthState: AuthStateService,
     private Router: Router
   ) {
-    // Auth API base URL
-    this.urlAuthApi = 'http://myglobalset-back.test/api/auth';
+    this.urlAuthApi = `${environment.API_URL}/auth`;
   }
 
-  // Log In
+  /**
+   * Log in a user.
+   * @param formData - User login data.
+   * @returns An observable with the login response.
+   */
   login(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/login`;
 
@@ -34,7 +37,11 @@ export class AuthService {
     );
   }
 
-  // Sign Up
+  /**
+   * Sign up a new user.
+   * @param formData - User signup data.
+   * @returns An observable with the signup response.
+   */
   signup(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/signup`;
 
@@ -43,14 +50,20 @@ export class AuthService {
     );
   }
 
-  // Log Out
+  /**
+   * Log out the current user.
+   */
   logout() {
     this.AuthState.changeAuthStatus(false);
     this.Token.remove();
     this.Router.navigateByUrl('/login');
   }
 
-  // Password Reset Link
+  /**
+   * Send a password reset link to the user's email.
+   * @param formData - User email for sending the reset link.
+   * @returns An observable with the response to the reset link request.
+   */
   sendPasswordResetLink(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/send-password-reset-link`;
 
@@ -59,7 +72,11 @@ export class AuthService {
     );
   }
 
-  // Change Password
+  /**
+   * Change the user's password.
+   * @param formData - User data for changing the password.
+   * @returns An observable with the response to the password change request.
+   */
   changePassword(formData: JSON): Observable<any> {
     const apiUrl = `${this.urlAuthApi}/change-password`;
 
@@ -67,5 +84,4 @@ export class AuthService {
       catchError(this.errorHandler.handleError)
     );
   }
-
 }

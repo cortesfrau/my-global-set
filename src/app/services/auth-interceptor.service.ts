@@ -13,7 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private authService: AuthService,
-    private router: Router
   ) {}
 
   /**

@@ -50,7 +50,8 @@
               <!-- Password Field -->
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="Password" formControlName="password" id="password"
+                <input type="password" class="form-control" placeholder="Password" formControlName="password"
+                id="password" autocomplete="new-password"
                   [ngClass]="{'is-invalid': f['password'].invalid && f['password'].dirty }">
                 <div *ngIf="f['password'].errors && f['password'].dirty" class="invalid-feedback">
                   <p *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</p>
@@ -60,7 +61,8 @@
               <!-- Confirm Password Field -->
               <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation" id="password_confirmation"
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="password_confirmation"
+                id="password_confirmation" autocomplete="new-password"
                   [ngClass]="{
                     'is-invalid':
                       f['password_confirmation'].invalid && f['password_confirmation'].dirty ||

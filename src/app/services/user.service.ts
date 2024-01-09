@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpErrorHandlerService } from './http-error-handler.service';
 import { TokenService } from './token.service';
-import { AuthStateService } from './auth-state.service';
+import { environment } from 'src/environments/environment';
 
 /**
  * Service responsible for handling user-related operations.
@@ -13,16 +13,14 @@ import { AuthStateService } from './auth-state.service';
 })
 export class UserService {
 
-  // Base URL for the authentication API
-  urlAuthApi: string;
+  apiBaseUrl: string;
 
   constructor(
     private http: HttpClient,
     private errorHandler: HttpErrorHandlerService,
     private tokenService: TokenService
   ) {
-    // Set the Auth API base URL
-    this.urlAuthApi = 'http://myglobalset-back.test/api';
+    this.apiBaseUrl = `${environment.API_URL}`;
   }
 
   /**
@@ -33,7 +31,7 @@ export class UserService {
   getAuthenticated(): Observable<any> {
 
     if (this.tokenService.loggedIn()) {
-      const apiUrl = `${this.urlAuthApi}/auth/me`;
+      const apiUrl = `${this.apiBaseUrl}/auth/me`;
       const token = this.tokenService.get();
 
       // Construct headers with the Authorization token
@@ -62,7 +60,7 @@ export class UserService {
    * If an error occurs, it returns an observable with the error information.
    */
   update(formData: JSON): Observable<any> {
-    const apiUrl = `${this.urlAuthApi}/user/update`;
+    const apiUrl = `${this.apiBaseUrl}/user/update`;
     const token = this.tokenService.get();
 
     // Set the Authorization header with the token

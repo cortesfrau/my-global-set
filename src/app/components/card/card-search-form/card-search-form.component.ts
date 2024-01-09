@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { ScryfallService } from 'src/app/services/scryfall.service';
 import { Card } from 'src/app/models/card.interface';
@@ -6,9 +6,9 @@ import { Observable, of, switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { CollectionService } from 'src/app/services/collection.service';
 import { User } from 'src/app/models/user.interface';
-import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import * as bootstrap from 'bootstrap';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-card-search-form',
