@@ -69,9 +69,9 @@
     align-items: center;
 
     &__icon {
-      width: 25px;
-      max-height: 25px;
-      margin-right: .75rem;
+      width: 23px;
+      max-height: 23px;
+      margin-right: .5rem;
     }
 
     &__name {
@@ -84,7 +84,7 @@
     font-size: $font-size-sm;
     display: flex;
     align-items: center;
-    margin: auto 0 .5rem 0;
+    margin: auto 0 .75rem 0;
 
     i {
       border-radius: 100%;

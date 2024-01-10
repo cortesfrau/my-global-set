@@ -25,7 +25,7 @@ export class CollectionListComponent implements OnInit {
   /** Flag indicating if there is a current API call in progress. */
   isLoading: boolean = true;
 
-  // Sort collections
+  /** Collections sorting */
   sortCriteria: string = 'card_name';
   sortOrder: 'asc' | 'desc' = 'asc';
 
