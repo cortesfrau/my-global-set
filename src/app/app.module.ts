@@ -11,7 +11,6 @@ import { CardPrintComponent } from './components/card/card-print/card-print.comp
 import { LoaderComponent } from './components/loader/loader.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NotificationBlockComponent } from './components/notification-block/notification-block.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
@@ -24,41 +23,42 @@ import { CollectionDetailComponent } from './components/collection/collection-de
 import { FormSpinnerComponent } from './components/form-spinner/form-spinner.component';
 import { PageHeaderComponent } from './components/page/page-header/page-header.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { InfoCollapseComponent } from './components/info-collapse/info-collapse.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardSearchFormComponent,
-    CardPrintListComponent,
-    CardPrintComponent,
-    LoaderComponent,
-    NavbarComponent,
-    FooterComponent,
-    NotificationBlockComponent,
-    LoginComponent,
-    ProfileComponent,
-    RequestResetComponent,
-    ResponseResetComponent,
-    HomeComponent,
-    SignupComponent,
-    CollectionListComponent,
-    CollectionItemComponent,
-    CollectionDetailComponent,
-    FormSpinnerComponent,
-    PageHeaderComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
-  providers: [ {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true,
-  },],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CardSearchFormComponent,
+        CardPrintListComponent,
+        CardPrintComponent,
+        LoaderComponent,
+        NavbarComponent,
+        FooterComponent,
+        LoginComponent,
+        ProfileComponent,
+        RequestResetComponent,
+        ResponseResetComponent,
+        HomeComponent,
+        SignupComponent,
+        CollectionListComponent,
+        CollectionItemComponent,
+        CollectionDetailComponent,
+        FormSpinnerComponent,
+        PageHeaderComponent
+    ],
+    providers: [{
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        InfoCollapseComponent
+    ]
 })
 export class AppModule { }

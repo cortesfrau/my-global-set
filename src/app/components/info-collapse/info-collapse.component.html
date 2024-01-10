@@ -1,14 +1,14 @@
-<div class="notification-block">
+<div class="info-collapse">
   <div class="container">
-    <div class="notification-block_header">
+    <div class="info-collapse_header">
       <div>
         <h4>What is <strong>My Global Set</strong>?</h4>
       </div>
-      <button (click)="toggleCollapse()" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#notification" aria-expanded="false" aria-controls="notification">
-        <i class="bi" [class.bi-chevron-down]="!collapseIsOpen" [class.bi-x-lg]="collapseIsOpen"></i>
+      <button	type="button"class="btn btn-primary" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        <i class="bi" [class.bi-chevron-down]="isCollapsed" [class.bi-x-lg]="!isCollapsed"></i>
       </button>
     </div>
-    <div class="notification-block_body collapse" id="notification">
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
       <p><strong>My Global Set</strong> is an application tailored for global set collectors of Magic: The Gathering cards from around the world.
         It offers a comprehensive search tool that catalogs every printed edition of individual cards, allowing collectors
         to streamline their search and manage their acquisitions with ease. This platform is designed to help enthusiasts
@@ -34,3 +34,21 @@
     </div>
   </div>
 </div>
+
+<!--
+
+<div class="info-collapse">
+  <div class="container">
+    <div class="info-collapse_header">
+      <div>
+        <h4>What is <strong>My Global Set</strong>?</h4>
+      </div>
+      <button (click)="toggleCollapse()" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#notification" aria-expanded="false" aria-controls="notification">
+        <i class="bi" [class.bi-chevron-down]="!collapseIsOpen" [class.bi-x-lg]="collapseIsOpen"></i>
+      </button>
+    </div>
+    <div class="notification-block_body collapse" id="notification">
+
+    </div>
+  </div>
+</div> -->
