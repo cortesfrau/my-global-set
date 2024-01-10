@@ -41,6 +41,10 @@
       margin: 20px 10px;
       min-width: 250px;
     }
+
+    @media only screen and (min-width: 1024px) {
+      min-width: 400px;
+    }
   }
 
   &_actions {
@@ -99,7 +103,6 @@
       margin-right: .5rem;
       width: 14px;
       height: 14px;
-      box-shadow: $box-shadow-sm;
     }
   }
 
