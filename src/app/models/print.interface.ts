@@ -16,5 +16,6 @@ export interface Print {
   digital: boolean,
   languages: Language[],
   lang: Language,
-  is_collected: boolean
+  is_collected: boolean,
+  is_foil_version: boolean
 }

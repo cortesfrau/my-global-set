@@ -40,6 +40,11 @@
                   <img class="collected-card-item_set__icon" src="{{ print.set_icon }}" alt="{{ print.set_name }}">
                   <h3 class="collected-card-item_set__name">{{ print.set_name }}</h3>
                 </div>
+                <p class="collected-card-item_foil" *ngIf="print.is_foil_version || (print.foil && !print.nonfoil)">
+                  <i class="bi bi-stars"></i>
+                  <span *ngIf="print.is_foil_version">Foil version</span>
+                  <span *ngIf="print.foil && !print.nonfoil">Foil only</span>
+                </p>
                 <p class="collected-card-item_lang"><i class="{{ print.lang.flag_icon }}"></i> {{ print.lang.name }}</p>
                 <p class="collected-card-item_copy">©{{ print.set_release_date | date:'yyyy' }} {{ print.artist }}</p>
               </div>

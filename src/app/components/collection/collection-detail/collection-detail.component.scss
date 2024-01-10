@@ -28,19 +28,18 @@
     width: 20%;
     max-width: 100px;
     box-shadow: $box-shadow;
-    margin: .5rem;
+    margin: 10px;
   }
 
   &_meta {
-    margin: 0 .5rem;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    padding: 1.5rem 0;
-    min-width: 115px;
 
     @media only screen and (min-width: 768px) {
-      margin: 0 1rem;
+      margin: 20px 10px;
+      min-width: 250px;
     }
   }
 
@@ -69,14 +68,23 @@
     align-items: center;
 
     &__icon {
-      width: 23px;
+      max-width: 23px;
       max-height: 23px;
-      margin-right: .5rem;
+      margin-right: .75rem;
     }
 
     &__name {
       font-size: $font-size-base;
       margin: 0;
+    }
+  }
+
+  &_foil {
+    font-size: $font-size-sm;
+    margin: auto 0 .75rem 0;
+
+    i {
+      margin-right: .5rem;
     }
   }
 
@@ -89,8 +97,9 @@
     i {
       border-radius: 100%;
       margin-right: .5rem;
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
+      box-shadow: $box-shadow-sm;
     }
   }
 
