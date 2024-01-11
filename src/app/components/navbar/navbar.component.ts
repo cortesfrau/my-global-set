@@ -14,12 +14,20 @@ export class NavbarComponent {
   constructor(
     private authStateService: AuthStateService,
     private authService: AuthService,
-  ){ }
+  ) { }
 
+  /**
+   * Initializes the component and subscribes to the authentication state changes.
+   * Updates the 'loggedIn' property based on the changes in authentication state.
+   */
   ngOnInit() {
     this.authStateService.authStatus.subscribe(value => this.loggedIn = value);
   }
 
+  /**
+   * Logs out the user by calling the logout method of the AuthService.
+   * @param event The MouseEvent that triggered the logout action.
+   */
   logout(event: MouseEvent): void {
     event.preventDefault();
     this.authService.logout();

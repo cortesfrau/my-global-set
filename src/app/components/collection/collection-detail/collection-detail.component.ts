@@ -145,6 +145,7 @@ export class CollectionDetailComponent implements OnInit {
             this.updateCollectionStats();
             this.collectionUpdatedSubject.next();
             this.cdr.detectChanges();
+            this.sortPrints();
             this.printLoadingStates[print.id] = false;
           },
           error: (error) => {
