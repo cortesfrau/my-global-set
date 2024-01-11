@@ -65,7 +65,7 @@
 
     &__star {
       color: $primary;
-      margin-left: 1.25rem;
+      margin-left: 1rem;
       font-size: 17px;
       display: flex;
       flex-direction: column;
@@ -73,7 +73,12 @@
       justify-content: center;
       text-align: center;
       position: relative;
-      top: -1px;
+      top: -2px;
+
+      @media only screen and (min-width: 768px) {
+        margin-left: 2rem;
+      }
+
     }
   }
 
