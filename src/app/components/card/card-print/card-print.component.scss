@@ -17,6 +17,8 @@
     padding: .75rem 1rem .75rem 1rem;
     background-color: $light;
     align-items: center;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
 
     &__left {
       width: auto;
@@ -94,6 +96,8 @@
     padding: .5rem .75rem;
     font-size: $font-size-sm;
     background-color: $light;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
   }
 
   // Card print set icon
